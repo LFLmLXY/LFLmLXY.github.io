@@ -1,7 +1,7 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
-date: {{ .Date }}
-lastmod: {{ .Date }}
+title: "Create Blog"
+date: 2025-03-03T21:45:43+08:00
+lastmod: 2025-03-03T21:45:43+08:00
 draft: true # 是否为草稿
 author: ["tkk"]
 
