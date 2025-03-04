@@ -26,4 +26,4 @@ cover:
     relative: false
 ---
 
-<!-- more -->
+<meta name="referrer" content="no-referrer" />
