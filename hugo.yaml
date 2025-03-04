@@ -27,9 +27,9 @@ languages:
         - name: 首页
           pageRef: /
           weight: 1 # 控制在页面上展示的前后顺序
-        - name: 文章
-          pageRef: posts/
-          weight: 2
+       # - name: 文章
+       #   pageRef: posts/
+       #   weight: 2
         - name: 归档
           pageRef: archives/
           weight: 5
@@ -140,7 +140,7 @@ params:
   # 主页展示模式
   # 个人信息模式
   profileMode:
-    enabled: true # needs to be explicitly set
+    enabled: false # needs to be explicitly set
     title: Welcome to my Blog
     subtitle: ""
     imageUrl: "blog.jpg"
@@ -155,7 +155,7 @@ params:
 
   # 主页 - 信息模式（默认）
   homeInfoParams:
-    Title: "Hi there \U0001F44B"
+    Title: "Hi there ⛳"
     Content: Welcome to my blog
   #  主页 - 信息模式 图标展示
   socialIcons:
