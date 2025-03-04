@@ -1,5 +1,5 @@
 baseURL: "https://LFLmLXY.github.io" # 主站的 URL
-title: FengLei's Blog # 站点标题
+title: LFL's Blog # 站点标题
 copyright: "[©2025 FengLei's Blog](https://LFLmLXY.github.io/)" # 网站的版权声明，通常显示在页脚
 theme: PaperMod # 主题
 languageCode: zh-cn # 语言
@@ -26,7 +26,10 @@ languages:
       main:
         - name: 首页
           pageRef: /
-          weight: 4 # 控制在页面上展示的前后顺序
+          weight: 1 # 控制在页面上展示的前后顺序
+        - name: 文章
+          pageRef: posts/
+          weight: 2
         - name: 归档
           pageRef: archives/
           weight: 5
@@ -113,9 +116,9 @@ params:
   # 评论的设置
   giscus:
     repo: "LFLmLXY/LFLmLXY.github.io"
-    repoId: "R_kgDOOB1W0g"
+    repoId: "R_kgDOOCMVLQ"
     category: "Announcements"
-    categoryId: "DIC_kwDOOB1W0s4Cne_4"
+    categoryId: "DIC_kwDOOCMVLc4CngOH"
     mapping: "pathname"
     strict: "0"
     reactionsEnabled: "1"
@@ -128,27 +131,27 @@ params:
 
   label:
     # 使用文本替代 Logo 标签
-    text: 'Hugo Start'
+    text: LFL's Blog
     # 网站 Logo 图片（/static 下面的文件名称）
-    icon: /apple-touch-icon.png
+    icon: "R-C.jpeg"
     # 图标高度
-    iconHeight: 35
+    iconHeight: 45
 
   # 主页展示模式
   # 个人信息模式
   profileMode:
-    enabled: false # needs to be explicitly set
-    title: ExampleSite
-    subtitle: "This is subtitle"
-    imageUrl: "<img location>"
+    enabled: true # needs to be explicitly set
+    title: Welcome to my Blog
+    subtitle: ""
+    imageUrl: "blog.jpg"
     imageWidth: 120
     imageHeight: 120
     imageTitle: my image
-    buttons:
-      - name: Posts
-        url: posts
-      - name: Tags
-        url: tags
+    #buttons:
+    #  - name: 文章
+    #    url: posts/
+    #  - name: bilibili
+    #    url: X
 
   # 主页 - 信息模式（默认）
   homeInfoParams:

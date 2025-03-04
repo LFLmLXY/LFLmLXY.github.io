@@ -4,6 +4,8 @@ date: 2025-03-03T21:45:38+08:00
 categories: ["手册"]
 tags: ["Markdown"]
 ---
+<meta name="referrer" content="no-referrer" />
+
 # Markdown 基本语法
 
 ## 标题(Headings)
@@ -132,11 +134,6 @@ Markdown 语法使用 **三个或更多星号** `***`、**减号** `---` 或 **�
 
 其实与链接相同，只是后面的链接是图片地址链接
 
-![R-C](https://gitee.com/a-cake-tree/typora-image/raw/master/R-C.jpeg)
+![OIP-C](https://gitee.com/a-cake-tree/typora-image/raw/master/OIP-C.jpeg)
 
-
-
-
-
-
-
+![ABC](https://gitee.com/a-cake-tree/typora-image/raw/master/ABC.jpeg)
