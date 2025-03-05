@@ -98,7 +98,7 @@ params:
   # 是否隐藏文章摘要
   hideSummary: false
   # 是否显示目录
-  showtoc: false
+  showtoc: true
   # 是否默认展开文章目录
   tocopen: false
 

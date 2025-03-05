@@ -3,6 +3,7 @@ title: 'Markdown 语法参考手册'
 date: 2025-03-03T21:45:38+08:00
 categories: ["手册"]
 tags: ["Markdown"]
+author: ["LFL"]
 ---
 <meta name="referrer" content="no-referrer" />
 

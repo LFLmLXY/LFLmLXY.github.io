@@ -3,9 +3,9 @@ title: "Hugo + PaperMod + Github Pages 搭建一个完善的个人博客"
 date: 2025-03-03T21:45:43+08:00
 lastmod: 2025-03-05T21:33:10+08:00
 draft: false # 是否为草稿
-author: ["tkk"]
+author: ["LFL"]
 
-categories: ["其他"]
+categories: ["hugo"]
 
 tags: ["博客搭建"]
 
@@ -27,7 +27,12 @@ cover:
 ---
 <meta name="referrer" content="no-referrer" />
 
+## 前言
+
+写这篇文章为了熟悉一下markdown的语法，如果以后还要建blog的话可以有一个熟悉的参考。<br>我是跟随着这位[大佬](https://sonnycalcr.github.io/)建好的博客，这篇文章也是参考大佬的博客写的。<br>[bilibili](https://www.bilibili.com/video/BV1pRYPetEWy/?spm_id_from=333.1007.top_right_bar_window_history.content.click)这是他建博客的视频，你们哪里不懂的可以看一下。
+
 ## 下载 hugo
+
 首先，安装 hugo，在 Windows 中，推荐使用 scoop 来安装预编译的二进制版本
 ```powershell
 scoop install hugo-extended
