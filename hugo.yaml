@@ -11,6 +11,7 @@ buildDrafts: false # 构建时是否包括草稿
 buildFuture: false # 构建未来发布的内容
 buildExpired: false # 构建过期的内容
 enableEmoji: true # 允许 emoji
+pagination.pagerSize: 5 #5篇文章翻页
 pygmentsUseClasses: true
 defaultContentLanguage: zh # 顶部首先展示的语言界面
 defaultContentLanguageInSubdir: false # 是否要在地址栏加上默认的语言代码
