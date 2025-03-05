@@ -136,7 +136,7 @@ params:
     # 使用文本替代 Logo 标签
     text: LFL's Blog
     # 网站 Logo 图片（/static 下面的文件名称）
-    icon: "R-C.jpg"
+    icon: "R-C.jpeg"
     # 图标高度
     iconHeight: 45
 
