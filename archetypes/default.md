@@ -3,11 +3,11 @@ title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
 lastmod: {{ .Date }}
 draft: true # 是否为草稿
-author: ["tkk"]
+author: ["LFL"] #文章作者
 
-categories: []
+categories: [] #文章分类
 
-tags: []
+tags: [] #文章标签
 
 keywords: []
 
