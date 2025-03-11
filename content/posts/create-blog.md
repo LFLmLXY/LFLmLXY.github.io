@@ -5,9 +5,9 @@ lastmod: 2025-03-05T21:33:10+08:00
 draft: false # 是否为草稿
 author: ["LFL"]
 
-categories: ["hugo"]
+categories: ["搭建博客"]
 
-tags: ["博客搭建"]
+tags: ["hugo"]
 
 keywords: []
 

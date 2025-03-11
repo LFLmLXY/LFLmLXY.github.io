@@ -2,6 +2,7 @@
 title: '这是一篇测试文章'
 date: 2025-03-02T11:01:38+08:00
 categories: ["通用技术"]
+draft: true # 是否为草稿
 tags: ["博客搭建", "Bilibili"]
 ---
 ## 前言
