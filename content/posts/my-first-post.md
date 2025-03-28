@@ -4,7 +4,26 @@ date: 2025-03-02T11:01:38+08:00
 categories: ["通用技术"]
 draft: true # 是否为草稿
 tags: ["博客搭建", "Bilibili"]
+draft: true # 是否为草稿
+author: ["LFL"] 
+keywords: []
+
+description: "" # 文章描述，与搜索优化相关
+summary: "" # 文章简单描述，会展示在主页
+weight: # 输入1可以顶置文章，用来给文章展示排序，不填就默认按时间排序
+slug: ""
+comments: true # 是否启用评论系统
+autoNumbering: true # 目录自动编号
+hideMeta: false # 是否隐藏文章的元信息，如发布日期、作者等
+mermaid: true
+cover:
+    image: ""
+    caption: ""
+    alt: ""
+    relative: false
+
 ---
+
 ## 前言
 
 这是一篇介绍如何使用 Hugo + PaperMod + Github Pages 搭建一个完善的个人博客的教程。
