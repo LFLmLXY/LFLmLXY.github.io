@@ -528,15 +528,26 @@ headers:
 1. 重启的话网络可能会没有自动连接上，那么就手动连接一下，再启动ShellClash。目前还没有找到100%可以自动启动的方法。
 
 2. 如果你的电脑连接上wifi并且可以上网，其他设备连接上会跳认证界面，你可以找到**网络->接口**把wan口删掉然后创建一个静态的wan口保存一下，然后再删了wan修改回去。然后电脑断掉wifi再连接，基本上就可以了。
+
 3. 有陌生设备连接时会断网，在终端再运行一遍`python ruijie.py`认证一下，目前没有找到更好的办法。
+
 4. 把2做了一遍后手机连接还是跳认证界面，将wifi关掉再打开，或者切换一下网络，然后再重新连接就可以了。
+
+5. 如果你让openwrt用wifi连接的校园网，你再开热点的话，会遇到打不开的情况，输入下面的代码
+
+   ```
+   rm /etc/config/wireless
+   wifi config
+   wifi down
+   wifi up
+   ```
+
+   
 
 ## 参考
 
 1. https://www.bilibili.com/video/BV1yr4meeENt/?spm_id_from=333.1391.0.0
-
 2. https://www.bilibili.com/video/BV1qM411w7W5/?spm_id_from=333.1391.0.0&vd_source=bde3073c7fac1db05c5ea47eed6aa6a6
-
 3. https://github.com/IDeLoveYou/SGU-Script认证脚本是在这个作者代码的基础上更改的
 
 ## 吐槽
