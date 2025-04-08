@@ -1,7 +1,7 @@
 ---
 title: "锐捷校园网——实现多设备上网"
 date: 2025-03-28T18:13:42+08:00
-lastmod: 2025-03-28T18:13:42+08:00
+lastmod: 2025-04-06T11:04:00+08:00
 draft: false # 是否为草稿
 author: ["LFL"] #文章作者
 
@@ -105,21 +105,6 @@ iptables -t mangle -A POSTROUTING -j TTL --ttl-set 64
 # iptables 拒绝 AC 进行 Flash 检测
 # iptables -I FORWARD -p tcp --sport 80 --tcp-flags ACK ACK -m string --algobm --string " src=\"http://1.1.1." -j DROP
 iptables -A FORWARD -p tcp --sport 80 --tcp-flags ACK ACK -m string --algo bm --string "src=\"http://1.1.1." -j DROP
-
-#校园网认证启动脚本
-# 启动Python程序及网络检查  
-/root/ruijie.py &  
-(  
-while true; do  
-    if ! ping -c 1 8.8.8.8 >/dev/null 2>&1; then  
-        /usr/bin/python3 /root/ruijie.py &  
-        sleep 5
-        crash -s start
-    fi  
-    sleep 600  
-done  
-) &  
-
 ```
 
 ## 安装ua3f和ShellClash
@@ -134,71 +119,48 @@ export url='https://raw.githubusercontent.com/juewuy/ShellCrash/master' && sh -c
 export url='https://fastly.jsdelivr.net/gh/juewuy/ShellCrash@master' && sh -c "$(curl -kfsSl $url/install.sh)" && source /etc/profile &> /dev/null
 #私人源
 export url='https://gh.jwsc.eu.org/master' && sh -c "$(curl -kfsSl $url/install.sh)" && source /etc/profile &> /dev/null
-
 ```
 
-安装步骤看这篇https://sunbk201public.notion.site/UA3F-Clash-16d60a7b5f0e457a9ee97a3be7cbf557?pvs=4
+![image-20250407180821163](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407180821163.png)
 
-启动crash会出现两行报错，下面步骤是问了deepseek解决的
+![image-20250407181057614](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407181057614.png)
 
-### 🔍 **逐步排查与解决方案**
+![image-20250407181136304](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407181136304.png)
 
-#### 1. **检查内核模块完整性与依赖**
+![image-20250407181216144](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407181216144.png)
 
-```
-# 确认关键模块是否已加载
-lsmod | grep -E "nf_nat|nf_conntrack|xt_nat"
+![image-20250407181238614](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407181238614.png)
 
-# 若未加载，尝试手动加载（需内核支持）
-modprobe nf_nat
-modprobe nf_conntrack
-modprobe xt_nat
+![image-20250407181250621](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407181250621.png)
 
-# 检查内核是否包含这些模块
-opkg list-installed | grep -E "kmod-nf-nat|kmod-ipt-nat"
-```
-
-- **若模块未安装**：
-
-  ```
-  opkg update
-  opkg install kmod-nf-nat kmod-ipt-nat
-  reboot
-  ```
-
-#### 2. **强制清理并重置防火墙规则**
+![image-20250407181313829](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407181313829.png)
 
 ```
-# 清空所有iptables规则（谨慎操作）
-iptables-legacy -t nat -F
-iptables-legacy -t nat -X
-iptables-legacy -t mangle -F
-iptables-legacy -t filter -F
-
-# 重新初始化防火墙
-service firewall restart
-service shellclash stop && service shellclash start
+#用于UA3F的Clash配置（无外部代理）
+https://cdn.jsdelivr.net/gh/SunBK201/UA3F@master/clash/ua3f-cn.yaml
 ```
 
-#### 3. **检查OpenWrt防火墙（fw3）配置冲突**
+![image-20250407181402017](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407181402017.png)
 
-```
-vi /etc/config/firewall
-```
+![image-20250407192730832](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407192730832.png)
 
-- 确保没有自定义规则与ShellClash冲突（例如重复的`PREROUTING`链）。
+<img src="https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407192805640.png" alt="image-20250407192805640" style="zoom:80%;" />
 
-- 重启防火墙：
+<img src="https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407192832533.png" alt="image-20250407192832533" style="zoom:50%;" />
 
-  bash
+<img src="https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407192912823.png" alt="image-20250407192912823" style="zoom:50%;" />
 
-  复制
+<img src="https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407192933768.png" alt="image-20250407192933768" style="zoom:50%;" />
 
-  ```
-  service firewall restart
-  ```
+<img src="https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407192953799.png" alt="image-20250407192953799" style="zoom:50%;" />
 
-#### 4. **切换iptables后端的终极方法**
+<img src="https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407193025170.png" alt="image-20250407193025170" style="zoom:50%;" />
+
+
+
+**启动crash会出现两行报错，下面步骤是问了deepseek解决的**
+
+#### 1. **切换iptables后端的终极方法**
 
 - 如果系统同时安装了`iptables-legacy`和`iptables-nft`，直接通过符号链接强制指定：
 
@@ -215,7 +177,7 @@ vi /etc/config/firewall
   iptables --version
   ```
 
-#### 5. **检查系统日志定位具体错误**
+#### 1. **检查系统日志定位具体错误**
 
 ```
 # 查看内核日志（重点关注nf_nat相关错误）
@@ -225,7 +187,7 @@ dmesg | grep -i "nat\|conntrack\|iptables"
 logread | grep "shellclash"
 ```
 
-#### 6. **测试手动添加PREROUTING规则**
+#### 3. **测试手动添加PREROUTING规则**
 
 ```
 # 使用绝对路径强制操作
@@ -238,11 +200,32 @@ iptables-legacy -t nat -L PREROUTING
 
 然后再启动`crash -s start`或者crash然后输入1
 
+### 安装UA3F
+
+```
+#从URL安装UA3F
+opkg update
+opkg install curl libcurl luci-compat
+export url='https://blog.sunbk201.site/cdn' && sh -c "$(curl -kfsSl $url/install.sh)"
+service ua3f reload
+```
+
+### 启动UA3F
+
+```
+#设置UA3F自动启动
+# 启动 UA3F
+uci set ua3f.enabled.enabled=1
+uci commit ua3f
+service ua3f start
+```
+
 ## 安装python3配置认证脚本
 
 打开终端
 
 ```
+opkg update
 opkg install python3
 opkg install python3-yaml
 ```
@@ -256,7 +239,7 @@ touch config.py
 
 下面是ruijie.py代码
 
-```
+```py
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -375,7 +358,7 @@ if __name__ == '__main__':
 
 下面是config.py的代码
 
-```
+```py
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -463,7 +446,7 @@ def read_cfg() -> dict:
     return cfg
 ```
 
-然后用命令`python ruijie.py`运行，然后会多出来一个`config.yaml`文件
+然后用命令`python ruijie.py`运行，然后会多出来一个`config.yml`文件
 
 ## 配置config.yaml文件
 
@@ -523,6 +506,24 @@ headers:
 
 如果没有成功，可以看看是不是ShelClash没有运行,如果运行了，并且网络也能ping通，那么多刷新几遍试试，或者重启一下试试
 
+## 定时断网重连
+
+点开`管控>任务设置>定时执行任务`自定义脚本写下面代码
+
+```
+if ! ping -c 1 202.99.160.68 >/dev/null 2>&1; then  
+       crash -s stop
+        sleep 10
+        /usr/bin/python3 /root/ruijie.py &  
+       sleep 10
+       crash -s start
+fi 
+```
+
+添加一条任务，记得打上对勾，最后面框框是1分钟执行一次，你可以按需更改，最后记得保存
+
+![image-20250406110204329](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250406110204329.png)
+
 ## 我遇到过的问题
 
 1. 重启的话网络可能会没有自动连接上，那么就手动连接一下，再启动ShellClash。目前还没有找到100%可以自动启动的方法。
@@ -533,7 +534,9 @@ headers:
 
 4. 把2做了一遍后手机连接还是跳认证界面，将wifi关掉再打开，或者切换一下网络，然后再重新连接就可以了。
 
-5. 如果你让openwrt用wifi连接的校园网，你再开热点的话，会遇到打不开的情况，输入下面的代码
+5. 终端不显示，`etc/init.d/ttyd`![image-20250407201653519](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407201653519.png)
+
+6. 如果你让openwrt用wifi连接的校园网，你再开热点的话，会遇到打不开的情况，输入下面的代码
 
    ```
    rm /etc/config/wireless
@@ -542,7 +545,6 @@ headers:
    wifi up
    ```
 
-   
 
 ## 参考
 
