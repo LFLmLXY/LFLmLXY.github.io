@@ -511,7 +511,7 @@ headers:
 点开`管控>任务设置>定时执行任务`自定义脚本写下面代码
 
 ```
-if ! ping -c 1 202.99.160.68 >/dev/null 2>&1; then  
+if ! ping -c 1 8.8.8.8 >/dev/null 2>&1; then  
        crash -s stop
         sleep 10
         /usr/bin/python3 /root/ruijie.py &  
