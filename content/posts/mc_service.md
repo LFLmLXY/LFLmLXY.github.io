@@ -44,7 +44,7 @@ jdk版本[下载地址](https://www.oracle.com/java/technologies/downloads/?er=2
 
 解压和安装
 
-```
+```bash
 tar -zxvf jdk-17.0.14_linux-x64_bin.tar.gz
 mv jdk-17.0.14 /usr/local/java/
 alternatives --install /usr/bin/java java /usr/local/java/jdk-17.0.14/bin/java 3
@@ -52,20 +52,20 @@ alternatives --install /usr/bin/java java /usr/local/java/jdk-17.0.14/bin/java 3
 
 alternatives安装和移除命令参数（看看就行）：
 
-```
+```bash
 alternatives --install <link> <name> <path> <priority>
 alternatives --remove <name> <path>
 ```
 
 切换jdk版本
 
-```
+```bash
 alternatives --config java
 ```
 
 注意：添加两个及以上的版本时需要给`/etc/profile`文件末尾加上
 
-```
+```bash
 export JAVA_HOME=/usr/local/java/jdk1.8.0_311
 export CLASSPATH=.:${JAVA_HOME}/jre/lib/rt.jar:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar
 export PATH=$PATH:${JAVA_HOME}/bin
@@ -85,13 +85,13 @@ source /etc/profile
 
 我下载文件为`server.jar`，上传并`cd`进所在文件夹之后执行命令启动服务端：
 
-```
+```bash
 java -jar server.jar nogui
 ```
 
 也可以加上jvm参数限制运行内存：
 
-```
+```bash
 # 限制最小内存为256MB，最大内存为1024MB
 java -Xms256M -Xmx1024M -jar server.jar nogui
 ```
@@ -106,7 +106,7 @@ java -Xms256M -Xmx1024M -jar server.jar nogui
 
 再次执行启动命令：
 
-```
+```bash
 java -jar server.jar nogui
 ```
 
@@ -120,13 +120,13 @@ java -jar server.jar nogui
 
 得到一个jar文件，将其上传至服务器某个目录下，并使用`cd`命令进入该目录，执行安装命令：
 
-```
+```bash
 java -jar "文件名" --installServer
 ```
 
 然后它就开始下载相应的依赖库，需要等一会，因为是从外网下载因此可能很慢或者失败，可以多试几次。<br>如果一直下载不成功且你有代理的话，可以在执行Forge Installer时通过jvm参数指定代理：
 
-```
+```bash
 # 例如：java -Dhttp.proxyHost="127.0.0.1" -Dhttp.proxyPort="1080" -Dhttps.proxyHost="127.0.0.1" -Dhttps.proxyPort="1080" -jar "forge-1.12.2-14.23.5.2855-installer.jar" --installServer
 java -Dhttp.proxyHost="http代理地址" -Dhttp.proxyPort="http代理端口" -Dhttps.proxyHost="https代理地址" -Dhttps.proxyPort="https代理端口" -jar "forge installer文件" --installServer
 ```
@@ -137,13 +137,13 @@ java -Dhttp.proxyHost="http代理地址" -Dhttp.proxyPort="http代理端口" -Dh
 
 **有的版本不会出现`forge-x.x.xx-xxx.jar`但会出现`run.sh`使用下面操作启动**
 
-```
+```bash
 ./run.sh
 ```
 
 我们可以先删除installer的jar文件和log，因为用不着了<br>然后使用命令启动forge服务端，例如我这个版本的：
 
-```
+```bash
 java -jar "forge-1.21.5-55.0.0-shim.jar" nogui
 ```
 
@@ -157,14 +157,14 @@ java -jar "forge-1.21.5-55.0.0-shim.jar" nogui
 
 `screen`可以让进程在后台运行
 
-```
+```bash
 yum update
 yum install screen
 ```
 
 `screen`常用命令介绍
 
-```
+```bash
 # 创建一个新的窗口
 screen -S test
  
@@ -211,13 +211,13 @@ LuckPerms放入位置：mods
 
 输入以下命令，禁止默认组使用所有原版命令：
 
-```
+```bash
 /lp group default permission set minecraft.command.* false
 ```
 
 单独开启 `/tp` 权限
 
-```
+```bash
 /lp group default permission set minecraft.command.teleport true
 ```
 
@@ -225,12 +225,12 @@ LuckPerms放入位置：mods
 
 输入命令使更改生效：
 
-```
+```bash
 /lp sync
 ```
 
 ## 其他常用指令
 
-```
+```bash
 gamerule keepInventory true    #死亡不掉落
 ```
