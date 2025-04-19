@@ -2,7 +2,7 @@
 title: "Mc_service"
 date: 2025-04-05T14:31:51+08:00
 lastmod: 2025-04-05T14:31:51+08:00
-draft: true # 是否为草稿
+draft: false# 是否为草稿
 author: ["LFL"] #文章作者
 
 categories: [] #文章分类
@@ -232,5 +232,5 @@ LuckPerms放入位置：mods
 ## 其他常用指令
 
 ```
-/gamerule keepInventory true    #死亡不掉落
+gamerule keepInventory true    #死亡不掉落
 ```
