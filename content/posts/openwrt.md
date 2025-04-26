@@ -42,9 +42,9 @@ luci-app-ttyd mod-rkp-ipid iptables-mod-filter iptables-mod-ipopt iptables-mod-u
 
 ![image-20250328183258795](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250328183258795.png)
 
-# 配置openwrt
 
-## 1.联网
+
+## 联网
 
 开机之后，用电脑连接上wifi名字叫**Kwrt_5G**，然后用网线让树莓派连接上校园网，增加一个wan口。wan口设备选择的是br-lan口，用的dhcp协议
 
@@ -160,24 +160,24 @@ https://cdn.jsdelivr.net/gh/SunBK201/UA3F@master/clash/ua3f-cn.yaml
 
 **启动crash会出现两行报错，下面步骤是问了deepseek解决的**
 
-#### 1. **切换iptables后端的终极方法**
+1. **切换iptables后端的终极方法**
 
-- 如果系统同时安装了`iptables-legacy`和`iptables-nft`，直接通过符号链接强制指定：
+如果系统同时安装了`iptables-legacy`和`iptables-nft`，直接通过符号链接强制指定：
 
-  ```
-  # 备份原有命令
-  mv /usr/sbin/iptables /usr/sbin/iptables.bak
-  mv /usr/sbin/ip6tables /usr/sbin/ip6tables.bak
-  
-  # 链接到legacy版本
-  ln -s /usr/sbin/iptables-legacy /usr/sbin/iptables
-  ln -s /usr/sbin/ip6tables-legacy /usr/sbin/ip6tables
-  
-  # 验证版本
-  iptables --version
-  ```
+```
+# 备份原有命令
+mv /usr/sbin/iptables /usr/sbin/iptables.bak
+mv /usr/sbin/ip6tables /usr/sbin/ip6tables.bak
 
-#### 1. **检查系统日志定位具体错误**
+# 链接到legacy版本
+ln -s /usr/sbin/iptables-legacy /usr/sbin/iptables
+ln -s /usr/sbin/ip6tables-legacy /usr/sbin/ip6tables
+
+# 验证版本
+iptables --version
+```
+
+2. **检查系统日志定位具体错误**
 
 ```
 # 查看内核日志（重点关注nf_nat相关错误）
@@ -187,7 +187,7 @@ dmesg | grep -i "nat\|conntrack\|iptables"
 logread | grep "shellclash"
 ```
 
-#### 3. **测试手动添加PREROUTING规则**
+3. **测试手动添加PREROUTING规则**
 
 ```
 # 使用绝对路径强制操作
@@ -220,7 +220,21 @@ uci commit ua3f
 service ua3f start
 ```
 
-## 安装python3配置认证脚本
+## 1.配置静态IP（二选一）
+
+如果你觉得方法2太麻烦，可以用这个方法
+
+* 首先重启一下openwrt
+* 手机或电脑连接openwrt的wifi，配置静态ip
+* 比如：我的lan接口是192.168.1.1
+  * IP地址192.168.1.*（\*表示2-254）
+  * 网关就是lanIP地址
+  * 子网掩码一般都是255.255.255.0
+  * dns配一个8.8.8.8就行
+
+这样你就能访问openwrt后台了，然后直接去校园网认证界面，看到导航栏的mac地址是openwrt的地址，然后登录校园网，这样就是openwrt去获取到的校园网ip，在这个openwrt网段下的设备都可以上网。
+
+## 2.安装python3配置认证脚本（二选一）
 
 打开终端
 
@@ -448,7 +462,7 @@ def read_cfg() -> dict:
 
 然后用命令`python ruijie.py`运行，然后会多出来一个`config.yml`文件
 
-## 配置config.yaml文件
+### 配置config.yaml文件
 
 由于我们wifi连接的树莓派，mac地址是树莓派的地址，如果地址栏mac地址是你的电脑，那么你需要修改一下mac地址，然后再进行此操作。断开校园网，用电脑再次认证一遍，认证之前需要打开F12
 
@@ -506,7 +520,7 @@ headers:
 
 如果没有成功，可以看看是不是ShelClash没有运行,如果运行了，并且网络也能ping通，那么多刷新几遍试试，或者重启一下试试
 
-## 定时断网重连
+### 定时断网重连
 
 点开`管控>任务设置>定时执行任务`自定义脚本写下面代码
 
