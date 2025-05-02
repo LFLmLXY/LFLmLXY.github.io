@@ -1,5 +1,5 @@
 ---
-title: "Mc_service"
+title: "MC服务器搭建"
 date: 2025-04-05T14:31:51+08:00
 lastmod: 2025-04-05T14:31:51+08:00
 draft: false# 是否为草稿
