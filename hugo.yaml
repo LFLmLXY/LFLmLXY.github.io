@@ -158,7 +158,7 @@ params:
 
   # 主页 - 信息模式（默认）
   homeInfoParams:
-    Title: "自律和不自律，都会吃苦 ⛳"
+    Title: "CakeTree 😋"
     Content: Welcome to my blog
   #  主页 - 信息模式 图标展示
   socialIcons:

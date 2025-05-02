@@ -36,7 +36,7 @@ cover:
 
 [openwrt](https://openwrt.ai/)。填上我们需要的一些软件包，把后面的**ipv6**打上勾，之后就是下载->烧录->启动
 
-```bash
+```txt
 luci-app-ttyd mod-rkp-ipid iptables-mod-filter iptables-mod-ipopt iptables-mod-u32 iptables-nft kmod-ipt-ipopt ipset iptables-mod-conntrack-extra
 ```
 
@@ -56,7 +56,7 @@ luci-app-ttyd mod-rkp-ipid iptables-mod-filter iptables-mod-ipopt iptables-mod-u
 
 ![image-20250328184146069](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250328184146069.png)
 
-```
+```txt
 ntp.aliyun.com
 time1.cloud.tencent.com
 time.ustc.edu.cn
@@ -67,7 +67,7 @@ cn.pool.ntp.org
 
 ![image-20250328184305879](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250328184305879.png)
 
-```
+```bash
 # 启动 UA3F
 uci set ua3f.enabled.enabled=1
 uci commit ua3f
@@ -111,7 +111,7 @@ iptables -A FORWARD -p tcp --sport 80 --tcp-flags ACK ACK -m string --algo bm --
 
 找到**服务->终端**
 
-```
+```bash
 #从URL安装ShellClash（以下链接三选一）
 #GitHub源(可能需要代理)
 export url='https://raw.githubusercontent.com/juewuy/ShellCrash/master' && sh -c "$(curl -kfsSl $url/install.sh)" && source /etc/profile &> /dev/null
@@ -135,7 +135,7 @@ export url='https://gh.jwsc.eu.org/master' && sh -c "$(curl -kfsSl $url/install.
 
 ![image-20250407181313829](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250407181313829.png)
 
-```
+```bash
 #用于UA3F的Clash配置（无外部代理）
 https://cdn.jsdelivr.net/gh/SunBK201/UA3F@master/clash/ua3f-cn.yaml
 ```
@@ -164,7 +164,7 @@ https://cdn.jsdelivr.net/gh/SunBK201/UA3F@master/clash/ua3f-cn.yaml
 
 如果系统同时安装了`iptables-legacy`和`iptables-nft`，直接通过符号链接强制指定：
 
-```
+```bash
 # 备份原有命令
 mv /usr/sbin/iptables /usr/sbin/iptables.bak
 mv /usr/sbin/ip6tables /usr/sbin/ip6tables.bak
@@ -179,7 +179,7 @@ iptables --version
 
 2. **检查系统日志定位具体错误**
 
-```
+```bash
 # 查看内核日志（重点关注nf_nat相关错误）
 dmesg | grep -i "nat\|conntrack\|iptables"
 
@@ -189,7 +189,7 @@ logread | grep "shellclash"
 
 3. **测试手动添加PREROUTING规则**
 
-```
+```bash
 # 使用绝对路径强制操作
 /usr/sbin/iptables-legacy -t nat -N PREROUTING
 /usr/sbin/iptables-legacy -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 7890
@@ -202,7 +202,7 @@ iptables-legacy -t nat -L PREROUTING
 
 ### 安装UA3F
 
-```
+```bash
 #从URL安装UA3F
 opkg update
 opkg install curl libcurl luci-compat
@@ -212,7 +212,7 @@ service ua3f reload
 
 ### 启动UA3F
 
-```
+```bash
 #设置UA3F自动启动
 # 启动 UA3F
 uci set ua3f.enabled.enabled=1
@@ -238,7 +238,7 @@ service ua3f start
 
 打开终端
 
-```
+```bash
 opkg update
 opkg install python3
 opkg install python3-yaml
@@ -246,7 +246,7 @@ opkg install python3-yaml
 
 在root目录下创建两个py文件
 
-```
+```bash
 touch ruijie.py
 touch config.py
 ```
@@ -474,7 +474,7 @@ def read_cfg() -> dict:
 
 我打####的地方都需要填，根据上面你获取的信息填
 
-```
+```yaml
 # 本配置文件内容需要根据学校服务器设置动态调整
 main:
   version: 3 # 配置文件版本号，请勿更改
@@ -524,7 +524,7 @@ headers:
 
 点开`管控>任务设置>定时执行任务`自定义脚本写下面代码
 
-```
+```bash
 if ! ping -c 1 8.8.8.8 >/dev/null 2>&1; then  
        crash -s stop
         sleep 10
@@ -552,7 +552,7 @@ fi
 
 6. 如果你让openwrt用wifi连接的校园网，你再开热点的话，会遇到打不开的情况，输入下面的代码
 
-   ```
+   ```bash
    rm /etc/config/wireless
    wifi config
    wifi down

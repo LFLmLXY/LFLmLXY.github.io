@@ -5,9 +5,9 @@ lastmod: 2025-04-05T14:31:51+08:00
 draft: false# 是否为草稿
 author: ["LFL"] #文章作者
 
-categories: [] #文章分类
+categories: ["游戏"] #文章分类
 
-tags: [] #文章标签
+tags: ["MC_Server","centOS"] #文章标签
 
 keywords: []
 
@@ -71,7 +71,7 @@ export CLASSPATH=.:${JAVA_HOME}/jre/lib/rt.jar:${JAVA_HOME}/lib/dt.jar:${JAVA_HO
 export PATH=$PATH:${JAVA_HOME}/bin
 ```
 
-```
+```bash
 source /etc/profile
 ```
 
