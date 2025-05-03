@@ -701,6 +701,42 @@ require('plugins.toggleterm')
 
 启动`ctr+\`
 
+### 搜索配置
+
+使用的是[nvim-telescope](https://github.com/nvim-telescope/telescope.nvim)插件
+
+在 `plugins.lua`里新增这个插件并做好配置
+
+```lua
+require("lazy").setup({
+... -- 省略其他行
+-- telescope
+    {
+    'nvim-telescope/telescope.nvim', tag = '0.1.8',
+      dependencies = { 'nvim-lua/plenary.nvim' }
+    }
+}
+```
+
+新建一个 `~/.config/nvim/lua/plugins/telescope.lua` 文件
+
+```lua
+local builtin = require('telescope.builtin')
+
+-- 进入telescope页面会是插入模式，回到正常模式就可以用j和k来移动了
+
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' }) -- 环境里要安装ripgrep
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+```
+
+最后在 `init.lua` 文件里面加上
+
+```lua
+require('plugins.telescope')
+```
+
 ## 参考
 
 1. https://martinlwx.github.io/zh-cn/config-neovim-from-scratch/

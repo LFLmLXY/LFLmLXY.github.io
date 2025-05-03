@@ -100,7 +100,7 @@ params:
   # 是否显示目录
   showtoc: true
   # 是否默认展开文章目录
-  tocopen: false
+  tocopen: true
 
   assets:
     # disableHLJS: true # to disable highlight.js

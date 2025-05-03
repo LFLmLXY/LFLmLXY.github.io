@@ -27,11 +27,11 @@ cover:
 ---
 <meta name="referrer" content="no-referrer" />
 
-## 前言
+## 1. 前言
 
 写这篇文章为了熟悉一下markdown的语法，如果以后还要建blog的话可以有一个熟悉的参考。<br>我是跟随着这位[大佬](https://sonnycalcr.github.io/)建好的博客，这篇文章也是参考大佬的博客写的。<br>[bilibili](https://www.bilibili.com/video/BV1pRYPetEWy/?spm_id_from=333.1007.top_right_bar_window_history.content.click)这是他建博客的视频，你们哪里不懂的可以看一下。
 
-## 下载 hugo
+## 2. 搭建 hugo
 
 首先，安装 hugo，在 Windows 中，推荐使用 scoop 来安装预编译的二进制版本
 ```powershell
@@ -53,7 +53,7 @@ iwr -useb get.scoop.sh | iex
 
 这样就表示安装成功了！！<br>
 
-## 建立站点
+### 建立站点
 
 在本地使用hugo创建一个站点`hugo new site <文件夹名>`
 
@@ -67,7 +67,7 @@ hugo new site dev
 cd dev
 ```
 
-## 添加 PaperMod 主题
+## 3.  配置PaperMod 
 
 然后，我们先将此目录初始化成 git 仓库
 
@@ -96,7 +96,7 @@ resources
 hugo.exe
 ```
 
-## 配置 PaperMod 主题
+### 配置主题
 
 把在`dev`下的hugo.toml 改成hugo.yaml
 
@@ -311,7 +311,7 @@ summary: archives
 ---
 ```
 
-#### 创建一篇文章
+### 创建一篇文章
 
 在 `dev\content` 目录下新建 `posts` 文件夹，在`posts`文件夹下创建`my-first.md`文件写入下面数据
 
@@ -391,7 +391,7 @@ hugo server
 
 ![image-20250305193129599](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250305193129599.png)
 
-## 配置关于页面
+### 配置关于页面
 
 新建两个文件，一个是 `dev\layouts\_default` 目录下的 `about.html`.没有`_default`文件夹就创建
 
@@ -436,7 +436,7 @@ hugo server
 
 ![image-20250305193837665](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250305193837665.png)
 
-## 配置评论
+### 配置评论
 
 这里的评论使用了 giscus 插件。
 
@@ -494,7 +494,7 @@ hugo server
 </script>
 ```
 
-### 1. 创建github仓库
+#### 🚅创建github仓库
 
 ​	进入[github](https://github.com/),注册账号就不赘述了。
 
@@ -506,7 +506,7 @@ hugo server
 
 ![image-20250305195304591](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250305195304591.png)
 
-### 2. 配置 giscus
+#### 🚅配置giscus
 
 然后，进入 [giscus](https://giscus.app/zh-CN) 官网，点击下图的链接
 
@@ -551,7 +551,7 @@ params:
 
 ![image-20250305201425169](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250305201425169.png)
 
-## 配置数学公式
+### 配置数学公式
 
 这里使用的是 mathjax。
 
@@ -627,7 +627,7 @@ $$
 
 上面的第二个公式之所以要用 div 包裹起来，是因为这里的数学公式如果有超过了三对花括号，那么，其解析和转义就会出问题，这个和 hugo 有关目前折中的方案就是上面这种在外面套一层 div。
 
-## 添加代码字体
+### 添加代码字体
 
 先到[谷歌字体](https://fonts.google.com/) 中找一款开源字体，我这里选用的是 Jetbrains Mono，然后复制其信息到`dev\layouts\partials\extend_head.html` 中，
 
@@ -654,7 +654,7 @@ code {
 
 这样就可以生效了，如果发现不生效，可以重新执行一下 `hugo server` 试试。
 
-## 代码明暗切换
+### 代码明暗切换
 
 我们先建立一个 `dev\assets\css\extended\chroma-styles-overrides.css` 文件，
 
@@ -904,7 +904,7 @@ markup:
 
 到这里就可以明暗切换了
 
-## 修改网页的 favicon
+### 修改网页的 favicon
 
 先到 [flaticon](https://www.flaticon.com/) 网站中找一个 icon 图片，然后放到 static 目录下，
 
@@ -1008,7 +1008,275 @@ params:
 }
 ```
 
-## 部署到 Github Pages
+### 配置侧边目录
+
+官方的默认目录形式很不方便，查看目录还需要翻到最上面，[详细内容](https://cloud.tencent.com/developer/article/1944127)
+
+#### 🚅toc代码
+
+先找到目录 layouts/partials/toc.html ，把之前的代码换成如下代码
+
+```javascript
+{{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
+{{- $has_headers := ge (len $headers) 1 -}}
+{{- if $has_headers -}}
+<aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details {{if (.Param "TocOpen") }} open{{ end }}>
+            <summary accesskey="c" title="(Alt + C)">
+                <span class="details">{{- i18n "toc" | default "Table of Contents" }}</span>
+            </summary>
+
+            <div class="inner">
+                {{- $largest := 6 -}}
+                {{- range $headers -}}
+                {{- $headerLevel := index (findRE "[1-6]" . 1) 0 -}}
+                {{- $headerLevel := len (seq $headerLevel) -}}
+                {{- if lt $headerLevel $largest -}}
+                {{- $largest = $headerLevel -}}
+                {{- end -}}
+                {{- end -}}
+
+                {{- $firstHeaderLevel := len (seq (index (findRE "[1-6]" (index $headers 0) 1) 0)) -}}
+
+                {{- $.Scratch.Set "bareul" slice -}}
+                <ul>
+                    {{- range seq (sub $firstHeaderLevel $largest) -}}
+                    <ul>
+                        {{- $.Scratch.Add "bareul" (sub (add $largest .) 1) -}}
+                        {{- end -}}
+                        {{- range $i, $header := $headers -}}
+                        {{- $headerLevel := index (findRE "[1-6]" . 1) 0 -}}
+                        {{- $headerLevel := len (seq $headerLevel) -}}
+
+                        {{/* get id="xyz" */}}
+                        {{- $id := index (findRE "(id=\"(.*?)\")" $header 9) 0 }}
+
+                        {{- /* strip id="" to leave xyz, no way to get regex capturing groups in hugo */ -}}
+                        {{- $cleanedID := replace (replace $id "id=\"" "") "\"" "" }}
+                        {{- $header := replaceRE "<h[1-6].*?>((.|\n])+?)</h[1-6]>" "$1" $header -}}
+
+                        {{- if ne $i 0 -}}
+                        {{- $prevHeaderLevel := index (findRE "[1-6]" (index $headers (sub $i 1)) 1) 0 -}}
+                        {{- $prevHeaderLevel := len (seq $prevHeaderLevel) -}}
+                        {{- if gt $headerLevel $prevHeaderLevel -}}
+                        {{- range seq $prevHeaderLevel (sub $headerLevel 1) -}}
+                        <ul>
+                            {{/* the first should not be recorded */}}
+                            {{- if ne $prevHeaderLevel . -}}
+                            {{- $.Scratch.Add "bareul" . -}}
+                            {{- end -}}
+                            {{- end -}}
+                            {{- else -}}
+                            </li>
+                            {{- if lt $headerLevel $prevHeaderLevel -}}
+                            {{- range seq (sub $prevHeaderLevel 1) -1 $headerLevel -}}
+                            {{- if in ($.Scratch.Get "bareul") . -}}
+                        </ul>
+                        {{/* manually do pop item */}}
+                        {{- $tmp := $.Scratch.Get "bareul" -}}
+                        {{- $.Scratch.Delete "bareul" -}}
+                        {{- $.Scratch.Set "bareul" slice}}
+                        {{- range seq (sub (len $tmp) 1) -}}
+                        {{- $.Scratch.Add "bareul" (index $tmp (sub . 1)) -}}
+                        {{- end -}}
+                        {{- else -}}
+                    </ul>
+                    </li>
+                    {{- end -}}
+                    {{- end -}}
+                    {{- end -}}
+                    {{- end }}
+                    <li>
+                        <a href="#{{- $cleanedID -}}" aria-label="{{- $header | plainify -}}">{{- $header | safeHTML -}}</a>
+                        {{- else }}
+                    <li>
+                        <a href="#{{- $cleanedID -}}" aria-label="{{- $header | plainify -}}">{{- $header | safeHTML -}}</a>
+                        {{- end -}}
+                        {{- end -}}
+                        <!-- {{- $firstHeaderLevel := len (seq (index (findRE "[1-6]" (index $headers 0) 1) 0)) -}} -->
+                        {{- $firstHeaderLevel := $largest }}
+                        {{- $lastHeaderLevel := len (seq (index (findRE "[1-6]" (index $headers (sub (len $headers) 1)) 1) 0)) }}
+                    </li>
+                    {{- range seq (sub $lastHeaderLevel $firstHeaderLevel) -}}
+                    {{- if in ($.Scratch.Get "bareul") (add . $firstHeaderLevel) }}
+                </ul>
+                {{- else }}
+                </ul>
+                </li>
+                {{- end -}}
+                {{- end }}
+                </ul>
+            </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+         // Make the first header active
+         activeElement = elements[0];
+         const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+         document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+     }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        // Check if there is an object in the top half of the screen or keep the last item active
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 && 
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+             const id = encodeURI(element.getAttribute('id')).toLowerCase();
+             if (element === activeElement){
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+             } else {
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+             }
+         })
+     }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;   
+    }
+</script>
+{{- end }}
+```
+
+#### 🚅调用代码
+
+找到目录 layouts/_default/about.html
+
+```javascript
+  {{- if (.Param "ShowToc") }}
+  {{- partial "toc.html" . }}
+  {{- end }}
+```
+
+大概是这个位置，看着放
+
+![image-20250503133019871](https://gitee.com/a-cake-tree/typora-image/raw/master/image-20250503133019871.png)
+
+#### 🚅修改css
+
+找到目录 css/extended/blank.css ，添加如下代码，
+
+```css
+:root {
+    --nav-width: 1380px;
+    --article-width: 650px;
+    --toc-width: 300px;
+}
+
+.toc {
+    margin: 0 2px 40px 2px;
+    border: 1px solid var(--border);
+    background: var(--entry);
+    border-radius: var(--radius);
+    padding: 0.4em;
+}
+
+.toc-container.wide {
+    position: absolute;
+    height: 100%;
+    border-right: 1px solid var(--border);
+    left: calc((var(--toc-width) + var(--gap)) * -1);
+    top: calc(var(--gap) * 2);
+    width: var(--toc-width);
+}
+
+.wide .toc {
+    position: sticky;
+    top: var(--gap);
+    border: unset;
+    background: unset;
+    border-radius: unset;
+    width: 100%;
+    margin: 0 2px 40px 2px;
+}
+
+.toc details summary {
+    cursor: zoom-in;
+    margin-inline-start: 20px;
+    padding: 12px 0;
+}
+
+.toc details[open] summary {
+    font-weight: 500;
+}
+
+.toc-container.wide .toc .inner {
+    margin: 0;
+}
+
+.active {
+    font-size: 110%;
+    font-weight: 600;
+}
+
+.toc ul {
+    list-style-type: circle;
+}
+
+.toc .inner {
+    margin: 0 0 0 20px;
+    padding: 0px 15px 15px 20px;
+    font-size: 16px;
+}
+
+.toc li ul {
+    margin-inline-start: calc(var(--gap) * 0.5);
+    list-style-type: none;
+}
+
+.toc li {
+    list-style: none;
+    font-size: 0.95rem;
+    padding-bottom: 5px;
+}
+
+.toc li a:hover {
+    color: var(--secondary);
+}
+```
+
+
+
+
+
+
+
+## 4. 部署到 Github Pages
 
 我们这里就选用简单的第一种比较直接的方式。
 
@@ -1143,7 +1411,7 @@ git push
 
 完事儿。
 
-## 故障修复
+## 5. 故障修复
 
 网站打开发现主题没有应用上去，[PaperMod](https://github.com/adityatelange/hugo-PaperMod/archive/master.zip)点链接下载一下。<br>下载好之后有一个PaperMod文件夹，将他与`dev\themes\PaperMod`文件夹替换<br>然后，推送一下
 
@@ -1153,9 +1421,7 @@ git commit -m "update2"
 git push
 ```
 
-
-
-## 项目目录
+## 6. 项目目录
 
 ```powershell
 C:\USERS\LFL\HUGO\DEV
@@ -1431,7 +1697,7 @@ C:\USERS\LFL\HUGO\DEV
                         render-image.html
 ```
 
-## 文章模板
+## 7. 文章模板
 
 文章模板是文章头部的基本配置，当你使用下面命令创建md文件时，基本配置会自动加入<br>`dev\archetypes\default.md`修改成下面代码
 

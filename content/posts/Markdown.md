@@ -138,3 +138,12 @@ Markdown 语法使用 **三个或更多星号** `***`、**减号** `---` 或 **�
 ![OIP-C](https://gitee.com/a-cake-tree/typora-image/raw/master/OIP-C.jpeg)
 
 ![ABC](https://gitee.com/a-cake-tree/typora-image/raw/master/ABC.jpeg)
+
+## 表格
+
+* 使用`|`来分割，例如`|表头|表头|`
+
+| 表头 | 表头 |
+| ---- | ---- |
+| 内容 | 内容 |
+
