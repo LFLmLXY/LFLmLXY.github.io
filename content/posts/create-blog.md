@@ -1,11 +1,11 @@
 ---
 title: "Hugo + PaperMod + Github Pages 搭建一个完善的个人博客"
 date: 2025-03-03T21:45:43+08:00
-lastmod: 2025-03-05T21:33:10+08:00
+lastmod: 2025-05-03T16:45:43+08:00
 draft: false # 是否为草稿
 author: ["LFL"]
 
-categories: ["搭建博客"]
+categories: ["计算机","部署"]
 
 tags: ["hugo"]
 

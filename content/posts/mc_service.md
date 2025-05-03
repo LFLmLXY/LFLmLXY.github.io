@@ -5,7 +5,7 @@ lastmod: 2025-04-05T14:31:51+08:00
 draft: false# 是否为草稿
 author: ["LFL"] #文章作者
 
-categories: ["游戏"] #文章分类
+categories: ["游戏","部署","服务器"] #文章分类
 
 tags: ["MC_Server","centOS"] #文章标签
 

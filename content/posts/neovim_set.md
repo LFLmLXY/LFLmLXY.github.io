@@ -5,7 +5,7 @@ lastmod: 2025-05-02T10:43:08+08:00
 draft: false # 是否为草稿
 author: ["LFL"] #文章作者
 
-categories: ["Nvim配置"] #文章分类
+categories: ["计算机"] #文章分类
 
 tags: ["neovim"] #文章标签
 

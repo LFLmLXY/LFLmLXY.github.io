@@ -5,7 +5,7 @@ lastmod: 2025-04-06T11:04:00+08:00
 draft: false # 是否为草稿
 author: ["LFL"] #文章作者
 
-categories: ["校园网防检测"] #文章分类
+categories: ["软路由"] #文章分类
 
 tags: ["openwrt","Pi 5"] #文章标签
 
