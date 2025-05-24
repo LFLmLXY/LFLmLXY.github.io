@@ -27,7 +27,7 @@ author: ["LFL"]
 
 ## 段落 (Paragraphs)
 
-Markdown 语法中的段落由一个或多个文本行组成，**使用空行来分隔不同的段落**。``
+Markdown 语法中的段落由一个或多个文本行组成，**使用空行来分隔不同的段落**。
 
 这是第一段。
 
@@ -84,29 +84,29 @@ __这也是粗体文本__
 
      2. 嵌套第一项的第二项
 
-  2. 第二项
-
-     - 这是第一项
-        - 这是二一一
-          + 这是二一一一
-
-  - 这是第三项
-    - 这是三一
-      - 这是三一一
 
 ## 代码 (Code)
 
 - ### 行内代码 (Code Spans)
 
-​	使用 **反引号** \` 包裹行内代码。`include <stdio.h>`
+  ```markdown
+  `include <stdio.h>`
+  ```
 
-​	如果代码内包含\`可以使用**双反引号 (``)** 
+​	`include <stdio.h>`
 
 - ### 代码块 (Code Blocks)
 
-  **围栏式代码块**：使用 **三个反引号** ```
-
-  ```py
+  ````markdown
+  ```python
+  def hello():
+      print("Hello, world!")
+  ```
+  ````
+  
+  
+  
+  ```markdown
   def hello():
       print("Hello, world!")
   ```
@@ -119,31 +119,109 @@ Markdown 语法使用 **三个或更多星号** `***`、**减号** `---` 或 **�
 
 ## 链接 (Links)
 
-使用 **方括号** `[]` 包裹链接文本，紧接着使用 **圆括号** `()` 包裹 URL 链接地址。
+```markdown
+[链接文本](https://www.example.com)
+```
 
 [链接文本](https://www.example.com)
 
-还可以在 URL 后面的圆括号中添加**链接标题**。悬浮会有提示`[链接文本](https://www.example.com "链接标题")`
+``` markdown
+[请把鼠标放在我身上](https://www.example.com "我是悬浮文本")
+```
 
 [请把鼠标放在我身上](https://www.example.com "我是悬浮文本")
 
-可以使用 **尖括号** `<>` 来快速将 URL 或邮箱地址转换为链接。`<https://www.baidu.com>`
+```markdown
+<https://www.baidu.com>
+```
 
 <https://www.baidu.com>
 
 ## 图片 (Images)
 
-其实与链接相同，只是后面的链接是图片地址链接
+```markdown
+![OIP-C](https://gitee.com/a-cake-tree/typora-image/raw/master/OIP-C.jpeg)
+```
 
 ![OIP-C](https://gitee.com/a-cake-tree/typora-image/raw/master/OIP-C.jpeg)
 
-![ABC](https://gitee.com/a-cake-tree/typora-image/raw/master/ABC.jpeg)
-
 ## 表格
 
-* 使用`|`来分割，例如`|表头|表头|`
+```markdown
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+```
 
-| 表头 | 表头 |
-| ---- | ---- |
-| 内容 | 内容 |
+| First Header | Second Header |
+| ------------ | ------------- |
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
+
+## 任务列表
+
+```markdown
+- [ ] a task list item
+- [X] a task list item
+```
+
+- [ ] a task list item
+
+- [X] a task list item
+
+## 分割线
+
+```markdown
+***
+---
+```
+
+---
+
+***
+
+## 警示块
+
+```markdown
+> [!NOTE]
+> 突出显示用户应考虑的信息，即使只是浏览也应考虑。
+
+> [!TIP]
+> 可选信息，可帮助用户取得更大的成功。
+
+> [!IMPORTANT]
+> 用户成功所需的关键信息。
+
+> [!WARNING]
+> 由于存在潜在风险，需要用户立即关注的关键内容。
+
+> [!CAUTION]
+> 操作的潜在负面后果。
+```
+
+> [!NOTE]
+> 突出显示用户应考虑的信息，即使只是浏览也应考虑。
+
+> [!TIP]
+> 可选信息，可帮助用户取得更大的成功。
+
+> [!IMPORTANT]
+> 用户成功所需的关键信息。
+
+> [!WARNING]
+> 由于存在潜在风险，需要用户立即关注的关键内容。
+
+> [!CAUTION]
+> 操作的潜在负面后果。
+
+```markdown
+> [!NOTE] FixIt
+```
+
+> [!NOTE] 
+
+
+
+> [!WARNING]+ 辐射
 
