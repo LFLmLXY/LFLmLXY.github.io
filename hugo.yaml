@@ -158,7 +158,7 @@ params:
 
   # 主页 - 信息模式（默认）
   homeInfoParams:
-    Title: "CakeTree 😋"
+    Title: "相信奇迹的人本身就和奇迹一样了不起"
     Content: Welcome to my blog
   #  主页 - 信息模式 图标展示
   socialIcons:
