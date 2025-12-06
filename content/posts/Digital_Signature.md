@@ -27,9 +27,11 @@ cover:
 ---
 
 <meta name="referrer" content="no-referrer" />
+
+
 ## 一、介绍
 
-百科：是一种功能类似写在[纸](https://zh.wikipedia.org/wiki/纸)上的普通[签名](https://zh.wikipedia.org/wiki/签名)、但是使用了[公钥加密](https://zh.wikipedia.org/wiki/公钥加密)领域的技术，以用于鉴别数字信息的方法。一套数字签名通常会定义两种互补的运算，一个用于签名，另一个用于验证。
+百科：是一种功能类似写在纸上的普通签名、但是使用了[公钥加密](https://zh.wikipedia.org/wiki/公钥加密)领域的技术，以用于鉴别数字信息的方法。一套数字签名通常会定义两种互补的运算，一个用于签名，另一个用于验证。
 
 数字签名的出现是为了解决，将公钥安全的传送到目标。防止黑客截获篡改公钥。
 
