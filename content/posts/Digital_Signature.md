@@ -47,7 +47,7 @@ cover:
 
 为了证明数字证书是CA，需要使用根CA对中间CA进行数字签名，那谁给根CA签名呢？答案是它自己
 
-![数字证书流程图](https://gitee.com/a-cake-tree/typora-image/raw/master/数字证书流程图.png)
+![数字证书流程图2](https://gitee.com/a-cake-tree/typora-image/raw/master/数字证书流程图（改）.png)
 
 根证书一般是电脑的操作系统或出厂自带的，一般都是可信的，所以自签名是不验证的
 
