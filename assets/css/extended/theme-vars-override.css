@@ -1,30 +1,52 @@
+/* ============================================
+   猫咪主题配色 — LFL's Blog
+   灵感: 橘猫暖色 + Claymorphism 软萌风格
+   ============================================ */
+
 :root {
-    --gap: 24px;
-    --content-gap: 20px;
-    --nav-width: 1024px;
-    --main-width: 720px;
-    --header-height: 60px;
-    --footer-height: 60px;
-    --radius: 8px;
-    --theme: rgb(255, 255, 255);
-    --entry: rgb(255, 255, 255);
-    --primary: rgb(30, 30, 30);
-    --secondary: rgb(108, 108, 108);
-    --tertiary: rgb(214, 214, 214);
-    --content: rgb(31, 31, 31);
-    --code-block-bg: rgb(245, 245, 245);
-    --code-bg: rgb(245, 245, 245);
-    --border: rgb(238, 238, 238);
+  --gap: 24px;
+  --content-gap: 20px;
+  --nav-width: 1024px;
+  --main-width: 720px;
+  --header-height: 60px;
+  --footer-height: 60px;
+  --radius: 16px;
+
+  /* 浅色模式 — 暖奶油色系 */
+  --theme: #FFF7ED;
+  --entry: #FFFFFF;
+  --primary: #431407;
+  --secondary: #9A3412;
+  --tertiary: #FED7AA;
+  --content: #292524;
+  --code-block-bg: #FFF1F2;
+  --code-bg: #FFF1F2;
+  --border: #FED7AA;
+
+  /* 猫咪主题特色色 */
+  --cat-orange: #F97316;
+  --cat-pink: #EC4899;
+  --cat-cream: #FFF7ED;
+  --cat-paw: #FB923C;
+  --link-color: #EA580C;
+  --link-hover: #C2410C;
 }
 
 .dark {
-    --theme: rgb(29, 30, 32);
-    --entry: rgb(46, 46, 51);
-    --primary: rgb(218, 218, 219);
-    --secondary: rgb(155, 156, 157);
-    --tertiary: rgb(65, 66, 68);
-    --content: rgb(196, 196, 197);
-    --code-block-bg: rgb(46, 46, 51);
-    --code-bg: rgb(46, 46, 51);
-    --border: rgb(51, 51, 51);
+  --theme: #1C1917;
+  --entry: #292524;
+  --primary: #FEF3C7;
+  --secondary: #FED7AA;
+  --tertiary: #44403C;
+  --content: #E7E5E4;
+  --code-block-bg: #292524;
+  --code-bg: #292524;
+  --border: #44403C;
+
+  --cat-orange: #FB923C;
+  --cat-pink: #F472B6;
+  --cat-cream: #FEF3C7;
+  --cat-paw: #F97316;
+  --link-color: #FB923C;
+  --link-hover: #FED7AA;
 }

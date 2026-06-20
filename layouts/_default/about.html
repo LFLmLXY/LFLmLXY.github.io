@@ -11,10 +11,10 @@
   {{- if (.Param "ShowToc") }}
   {{- partial "toc.html" . }}
   {{- end }}
-<section>
-  <br>
-  {{ .Content }}
-</section>
- 
-{{- end }}{{/* end main */}}
 
+  <section>
+    <br>
+    {{ .Content }}
+  </section>
+
+{{- end }}{{/* end main */}}

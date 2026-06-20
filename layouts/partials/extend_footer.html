@@ -1,40 +1,102 @@
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" -->
-<!--   integrity="sha512-N9IJRoc3LaP3NDoiGkcPa4gG94kapGpaA5Zq9/Dr04uf5TbLFU5q0o8AbRhLKUUlp8QFS2u7S+Yti0U7QtuZvQ==" -->
-<!--   crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+<!-- 阅读进度条 -->
+<div class="reading-progress" id="reading-progress"></div>
+
+<!-- 浮动按钮组 -->
+<div class="floating-actions">
+  <a href="/" class="floating-btn" id="btn-home" title="回首页" aria-label="回首页">🏠</a>
+  <button class="floating-btn" id="btn-copy-link" title="复制文章链接" aria-label="复制链接">🔗</button>
+  <button class="floating-btn" id="btn-scroll-top" title="回顶部" aria-label="回顶部">⬆</button>
+</div>
+
+<!-- 猫咪装饰 -->
+<div style="text-align:center;padding:1rem 0;font-size:1.5rem;opacity:0.6;pointer-events:none">
+  🐱 🐾 ✨ 🐾 🐱
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js"
   integrity="sha512-9ZKhgaFdKlsELap/dGw3Iaz5Bj+Las0XXZiRKYZaN9QArg6FtkD5rULNmNH4rTCTFxjPiBGr3MX8smRADRorDA=="
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
+  // 操作系统检测
   var OSName = "unknown";
   var navApp = navigator.userAgent.toLowerCase();
   switch (true) {
-    case (navApp.indexOf("win") != -1):
-      OSName = "windows";
-      break;
-    case (navApp.indexOf("mac") != -1):
-      OSName = "apple";
-      break;
-    case (navApp.indexOf("linux") != -1):
-      OSName = "linux";
-      break;
-    case (navApp.indexOf("x11") != -1):
-      OSName = "unix";
-      break;
+    case (navApp.indexOf("win") != -1): OSName = "windows"; break;
+    case (navApp.indexOf("mac") != -1): OSName = "apple"; break;
+    case (navApp.indexOf("linux") != -1): OSName = "linux"; break;
+    case (navApp.indexOf("x11") != -1): OSName = "unix"; break;
   }
 
-  const images = Array.from(document.querySelectorAll(".post-content img"));
-  images.forEach(img => {
-    mediumZoom(img, {
-      margin: 1, /* The space outside the zoomed image */ /* 留一点余地，防止在有些情况下，计算四舍五入导致的图片放大稍微超过窗口大小，然后会露出丑陋的横向滚动框 */
-      // scrollOffset: 40, /* The number of pixels to scroll to close the zoom */
-      container: null, /* The viewport to render the zoom in */
-      template: null, /* The template element to display on zoom */
-      // background: 'rgba(0, 0, 0, 0.5)'
-    });
+  // 图片缩放
+  var images = Array.from(document.querySelectorAll(".post-content img"));
+  images.forEach(function(img) {
+    mediumZoom(img, { margin: 1, container: null, template: null });
   });
 
-  if (OSName == "windows") {
-    document.body.className += ' win11'
-  }
+  if (OSName == "windows") document.body.className += ' win11';
+
+  // ====== 阅读进度条 ======
+  (function() {
+    var bar = document.getElementById('reading-progress');
+    if (!bar) return;
+    window.addEventListener('scroll', function() {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      if (scrollHeight > 0) bar.style.width = (scrollTop / scrollHeight * 100) + '%';
+    });
+  })();
+
+  // ====== 复制文章链接 ======
+  (function() {
+    var btnCopy = document.getElementById('btn-copy-link');
+    if (!btnCopy) return;
+    btnCopy.addEventListener('click', function() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        btnCopy.textContent = '✅';
+        setTimeout(function() { btnCopy.textContent = '🔗'; }, 1500);
+      });
+    });
+  })();
+
+  // ====== 浮动按钮：回顶部显示/隐藏 ======
+  (function() {
+    var btnTop = document.getElementById('btn-scroll-top');
+    if (!btnTop) return;
+    window.addEventListener('scroll', function() {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop > 300) {
+        btnTop.classList.add('visible');
+      } else {
+        btnTop.classList.remove('visible');
+      }
+    });
+    btnTop.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+
+  // ====== 标题锚点链接 ======
+  (function() {
+    var headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    headings.forEach(function(h) {
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.className = 'anchor-link';
+      a.textContent = '#';
+      a.title = '复制链接';
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var url = window.location.origin + window.location.pathname + '#' + h.id;
+        navigator.clipboard.writeText(url).then(function() {
+          a.textContent = '✓';
+          setTimeout(function() { a.textContent = '#'; }, 1500);
+        });
+      });
+      h.appendChild(a);
+    });
+  })();
+
+  // ====== 全局平滑滚动 ======
+  document.documentElement.style.scrollBehavior = 'smooth';
 </script>

@@ -1,152 +1,113 @@
-:root {
-    --nav-width: 1380px;
-    --article-width: 650px;
-    --toc-width: 300px;
-    --link-color: #a8e6cf;
-}
+/* ============================================
+   全局基础样式 — 猫咪主题 Claymorphism 风格
+   ============================================ */
 
-.toc {
-    margin: 0 2px 40px 2px;
-    border: 1px solid var(--border);
-    background: var(--entry);
-    border-radius: var(--radius);
-    padding: 0.4em;
-}
-
-.toc-container.wide {
-    position: absolute;
-    height: 100%;
-    border-right: 1px solid var(--border);
-    left: calc((var(--toc-width) + var(--gap)) * -1);
-    top: calc(var(--gap) * 2);
-    width: var(--toc-width);
-}
-
-.wide .toc {
-    position: sticky;
-    top: var(--gap);
-    border: unset;
-    background: unset;
-    border-radius: unset;
-    width: 100%;
-    margin: 0 2px 40px 2px;
-}
-
-.toc details summary {
-    cursor: zoom-in;
-    margin-inline-start: 20px;
-    padding: 12px 0;
-}
-
-.toc details[open] summary {
-    font-weight: 500;
-}
-
-.toc-container.wide .toc .inner {
-    margin: 0;
-}
-
-.active {
-    font-size: 110%;
-    font-weight: 600;
-}
-
-.toc ul {
-    list-style-type: circle;
-}
-
-.toc .inner {
-    margin: 0 0 0 20px;
-    padding: 0px 15px 15px 20px;
-    font-size: 16px;
-}
-
-.toc li ul {
-    margin-inline-start: calc(var(--gap) * 0.5);
-    list-style-type: none;
-}
-
-.toc li {
-    list-style: none;
-    font-size: 0.95rem;
-    padding-bottom: 5px;
-}
-
-.toc li a:hover {
-    color: var(--secondary);
-}
-
-.dark {
-  /* 首页的介绍处的链接 */
-  .entry-content {
-    a {
-      color: var(--link-color);
-    }
-  }
-  /* 文章(post)中的链接 */
-  .post-content {
-    a {
-      color: var(--link-color);
-    }
-  }
-
-  /* 这里要重启 server 才能看到效果 */
-  .pagination a {
-    background: rgb(168, 168, 242);
-  }
-}
-
-.pagination a {
-  background: rgb(80, 104, 81);
-}
-
+/* 圆润字体 */
 body {
-  font-size: 1rem;
-  line-height: 1.5;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
   word-break: break-word;
 }
 
-.post-content pre,
-code {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 1rem;
-  line-height: 1.2;
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-weight: 600;
 }
 
-/* 评论的样式自定义 */
+/* 代码保持等宽字体 */
+.post-content pre,
+code {
+  font-family: "JetBrains Mono", "Cascadia Code", monospace;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* 链接颜色 */
+a {
+  color: var(--link-color);
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: var(--link-hover);
+}
+
+/* 文章内容链接 */
+.post-content a {
+  color: var(--link-color);
+  text-decoration: underline;
+  text-decoration-color: var(--cat-paw);
+  text-underline-offset: 3px;
+  transition: all 0.2s ease;
+}
+.post-content a:hover {
+  color: var(--link-hover);
+  text-decoration-color: var(--cat-orange);
+}
+
+/* 暗色模式下链接 */
+.dark .entry-content a,
+.dark .post-content a {
+  color: var(--link-color);
+}
+.dark .post-content a:hover {
+  color: var(--link-hover);
+}
+
+/* 评论区域 */
 #tw-comment {
   margin-top: 3rem;
 }
 
-/* medium-zoom 图片放大后的背景样式 */
-.medium-zoom-overlay {
-  background: rgba(255, 255, 255, 0.5) !important;
+/* ============================================
+   Claymorphism 卡片效果
+   ============================================ */
+
+/* 文章卡片软萌阴影 */
+.post-entry {
+  border-radius: var(--radius) !important;
+  box-shadow:
+    0 4px 6px -2px rgba(249, 115, 22, 0.08),
+    0 10px 15px -5px rgba(249, 115, 22, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.dark {
-  .medium-zoom-overlay {
-    background: rgba(0, 0, 0, 0.5) !important;
-  }
+.post-entry:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 12px -4px rgba(249, 115, 22, 0.12),
+    0 20px 25px -10px rgba(249, 115, 22, 0.08);
 }
 
-.win11 {
-  .medium-zoom-image {
-    cursor: url(../../static/cursors/zoom-in.svg), default !important;
-  }
-  .medium-zoom--opened .medium-zoom-overlay {
-    cursor: url(../../static/cursors/zoom-out.svg), default !important;
-  }
-  .medium-zoom-image--opened {
-    cursor: url(../../static/cursors/zoom-out.svg), default !important;
-  }
+/* 导航栏 */
+.nav {
+  border-radius: 0 0 var(--radius) var(--radius);
 }
 
-/* 去掉文章页面底部的上一页和下一页中链接文字的下划线，这东西浏览器审查元素捕捉不到，不知道为啥 */
-.paginav span:hover:not(.title) {
-  box-shadow: none;
+/* 页脚 */
+.footer {
+  border-radius: var(--radius) var(--radius) 0 0;
 }
-/* 下一页的那里的内边距调节 */
-.paginav {
-  a {
-    padding-bottom: 0.5em;
-  }
+
+/* 标签和分类徽章 */
+.post-tags a,
+.post-categories a {
+  border-radius: 20px !important;
+  padding: 4px 12px !important;
+  transition: all 0.2s ease;
+}
+.post-tags a:hover {
+  background: var(--cat-orange) !important;
+  color: #fff !important;
+}
+
+/* 首页信息区域 */
+.home-info {
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+/* 代码块圆角 */
+.post-content pre,
+.post-content .highlight {
+  border-radius: var(--radius);
 }

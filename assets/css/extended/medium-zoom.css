@@ -1,0 +1,18 @@
+/* medium-zoom 图片放大背景 */
+.medium-zoom-overlay {
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+.dark .medium-zoom-overlay {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Windows 11 下使用自定义光标 */
+.win11 .medium-zoom-image {
+  cursor: url(../../static/cursors/zoom-in.svg), default !important;
+}
+.win11 .medium-zoom--opened .medium-zoom-overlay {
+  cursor: url(../../static/cursors/zoom-out.svg), default !important;
+}
+.win11 .medium-zoom-image--opened {
+  cursor: url(../../static/cursors/zoom-out.svg), default !important;
+}

@@ -1,0 +1,166 @@
+/* ============================================
+   侧边悬浮目录 — 右侧 sticky + Claymorphism 风格
+   ============================================ */
+
+:root {
+  --toc-width: 240px;
+  --link-color: #EA580C;
+}
+
+/* 目录容器 — 右侧固定定位，远离内容区 */
+.toc-container {
+  position: fixed;
+  right: max(12px, calc((100vw - var(--main-width)) / 2 - var(--toc-width) - 48px));
+  top: 100px;
+  width: var(--toc-width);
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+/* 目录卡片 */
+.toc {
+  background: var(--entry);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  box-shadow:
+    0 4px 6px -2px rgba(249, 115, 22, 0.06),
+    0 10px 15px -5px rgba(249, 115, 22, 0.04);
+  transition: box-shadow 0.3s ease;
+}
+.toc:hover {
+  box-shadow:
+    0 6px 10px -3px rgba(249, 115, 22, 0.1),
+    0 15px 20px -8px rgba(249, 115, 22, 0.06);
+}
+
+/* 目录标题 */
+.toc details summary {
+  cursor: pointer;
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--cat-orange);
+  padding: 6px 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+.toc details summary::-webkit-details-marker {
+  display: none;
+}
+.toc details summary::before {
+  content: "🐾";
+  font-size: 1rem;
+}
+.toc details summary::after {
+  content: "▾";
+  margin-left: auto;
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+  color: var(--secondary);
+}
+.toc details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.toc details[open] summary {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* 目录内容区 */
+.toc .inner {
+  margin: 0;
+  padding: 4px 0 0 4px;
+  font-size: 0.9rem;
+}
+
+/* 目录列表 */
+.toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.toc li {
+  padding: 3px 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+.toc li:hover {
+  background: var(--cat-cream);
+}
+.dark .toc li:hover {
+  background: var(--tertiary);
+}
+
+.toc li a {
+  display: block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  color: var(--secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+.toc li a:hover {
+  color: var(--cat-orange);
+  background: rgba(249, 115, 22, 0.06);
+}
+
+/* 当前激活的目录项 */
+.toc li a.active {
+  color: var(--cat-orange);
+  font-weight: 600;
+  background: rgba(249, 115, 22, 0.08);
+  border-left-color: var(--cat-orange);
+}
+
+/* 子目录缩进 */
+.toc li ul {
+  padding-left: 16px;
+}
+
+/* 平滑滚动 */
+.toc {
+  scroll-behavior: smooth;
+}
+
+/* ============================================
+   移动端适配 — 目录收起到顶部
+   ============================================ */
+@media screen and (max-width: 1100px) {
+  .toc-container {
+    position: relative;
+    right: auto;
+    top: auto;
+    width: 100%;
+    max-height: none;
+    margin-bottom: 1.5rem;
+  }
+  .toc {
+    border-radius: var(--radius);
+  }
+  .toc .inner {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}
+
+/* 滚动条美化 */
+.toc-container::-webkit-scrollbar {
+  width: 4px;
+}
+.toc-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.toc-container::-webkit-scrollbar-thumb {
+  background: var(--tertiary);
+  border-radius: 4px;
+}

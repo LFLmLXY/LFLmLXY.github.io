@@ -30,17 +30,12 @@
     display: none;
 }
 
-/**/
-/* 代码块的滚动条 */
-/**/
+/* 代码块内滚动条 */
 .post-content :not(table) ::-webkit-scrollbar-thumb {
     border: 2px solid var(--code-block-bg);
-    /*background: rgb(113, 113, 117);*/
     background: var(--tertiary);
 }
-/* 鼠标悬浮在上面的时候 */
 .post-content :not(table) ::-webkit-scrollbar-thumb:hover {
-    /*background: rgb(163, 163, 165);*/
     background: var(--secondary);
 }
 

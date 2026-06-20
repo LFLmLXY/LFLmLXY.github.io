@@ -1,0 +1,313 @@
+/* ============================================
+   猫咪主题装饰 — 可爱的动效和细节
+   ============================================ */
+
+/* 全局平滑过渡 */
+* {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+/* 选中文字颜色 */
+::selection {
+  background: var(--cat-orange);
+  color: #fff;
+}
+
+/* 主题切换按钮动效 */
+#theme-toggle svg {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#theme-toggle:hover svg {
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* Logo 图标圆润化 */
+.logo img {
+  border-radius: 50% !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.logo:hover img {
+  transform: rotate(-10deg) scale(1.1);
+}
+
+/* logo 文字 */
+.logo a {
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-weight: 600;
+}
+
+/* 导航菜单项 */
+#menu li a {
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+#menu li a:hover {
+  background: rgba(249, 115, 22, 0.08);
+  color: var(--cat-orange);
+}
+
+/* 搜索框圆润化 */
+.search input,
+#searchbox input {
+  border-radius: 24px !important;
+  border: 2px solid var(--border) !important;
+  padding: 10px 20px !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.search input:focus,
+#searchbox input:focus {
+  border-color: var(--cat-orange) !important;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+  outline: none;
+}
+
+/* "回到顶部" 按钮 — 改为浮动按钮组 */
+#top-link {
+  display: none; /* 用我们自己的浮动按钮组替代 */
+}
+
+/* ============================================
+   浮动按钮组 — 右下角固定
+   ============================================ */
+.floating-actions {
+  position: fixed;
+  bottom: 32px;
+  right: 28px;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.floating-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  cursor: pointer;
+  border: none;
+  background: var(--entry);
+  color: var(--cat-orange);
+  box-shadow:
+    0 4px 12px rgba(249, 115, 22, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+.floating-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow:
+    0 8px 20px rgba(249, 115, 22, 0.25),
+    0 4px 8px rgba(0, 0, 0, 0.08);
+  background: var(--cat-orange);
+  color: #fff;
+}
+.floating-btn:active {
+  transform: scale(0.92);
+}
+
+/* 回顶部按钮 — 默认隐藏，滚动后才出现 */
+#btn-scroll-top {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, color 0.3s ease;
+}
+#btn-scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 暗色模式 */
+.dark .floating-btn {
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.dark .floating-btn:hover {
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.4),
+    0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   移动端浮动按钮 — 缩小尺寸
+   ============================================ */
+@media (max-width: 768px) {
+  .floating-actions {
+    bottom: 20px;
+    right: 16px;
+    gap: 10px;
+  }
+  .floating-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
+}
+
+/* 面包屑导航 */
+.breadcrumbs a {
+  color: var(--cat-orange) !important;
+}
+
+/* 归档页面日期 */
+.archive-entry {
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+.archive-entry:hover {
+  background: rgba(249, 115, 22, 0.04);
+}
+
+/* 分享按钮 */
+.share-buttons a {
+  transition: transform 0.2s ease;
+}
+.share-buttons a:hover {
+  transform: scale(1.15);
+}
+
+/* 页码按钮 */
+.pagination a {
+  border-radius: 12px !important;
+  background: var(--cat-orange) !important;
+  color: #fff !important;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pagination a:hover {
+  background: var(--link-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+/* 文章元信息标签 */
+.post-meta {
+  color: var(--secondary);
+}
+
+/* 分类/标签页面 */
+.terms-tags a {
+  border-radius: 20px !important;
+  padding: 6px 16px !important;
+  background: var(--entry);
+  border: 2px solid var(--border);
+  transition: all 0.2s ease;
+}
+.terms-tags a:hover {
+  background: var(--cat-orange) !important;
+  border-color: var(--cat-orange) !important;
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+
+/* 代码复制按钮 */
+.copy-code {
+  border-radius: 8px !important;
+  transition: all 0.2s ease;
+}
+.copy-code:hover {
+  background: var(--cat-orange) !important;
+  color: #fff !important;
+}
+
+/* 暗色模式卡片阴影适配 */
+.dark .post-entry {
+  box-shadow:
+    0 4px 6px -2px rgba(0, 0, 0, 0.2),
+    0 10px 15px -5px rgba(0, 0, 0, 0.15);
+}
+.dark .post-entry:hover {
+  box-shadow:
+    0 8px 12px -4px rgba(0, 0, 0, 0.3),
+    0 20px 25px -10px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   阅读进度条
+   ============================================ */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cat-orange), var(--cat-pink));
+  z-index: 100;
+  width: 0;
+  transition: width 0.1s linear;
+  border-radius: 0 2px 2px 0;
+}
+
+/* ============================================
+   标题锚点链接 — hover 显示复制链接按钮
+   ============================================ */
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+  position: relative;
+  scroll-margin-top: 80px;
+}
+
+.post-content h1:hover .anchor-link,
+.post-content h2:hover .anchor-link,
+.post-content h3:hover .anchor-link,
+.post-content h4:hover .anchor-link,
+.post-content h5:hover .anchor-link,
+.post-content h6:hover .anchor-link {
+  opacity: 1;
+}
+
+.anchor-link {
+  display: inline-block;
+  opacity: 0;
+  margin-left: 8px;
+  font-size: 0.8em;
+  color: var(--cat-orange);
+  text-decoration: none !important;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.anchor-link:hover {
+  transform: scale(1.2);
+}
+
+/* ============================================
+   代码块语言标签
+   ============================================ */
+.post-content .highlight {
+  position: relative;
+}
+.post-content .highlight::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0;
+  right: 2.5rem;
+  padding: 2px 10px;
+  font-size: 0.75rem;
+  font-family: "Nunito", sans-serif;
+  color: var(--secondary);
+  background: var(--tertiary);
+  border-radius: 0 0 6px 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 2;
+}
+.dark .post-content .highlight::before {
+  color: var(--secondary);
+  background: var(--tertiary);
+}
+
+/* 没有 data-lang 属性时隐藏 */
+.post-content .highlight:not([data-lang])::before,
+.post-content .highlight[data-lang=""]::before {
+  display: none;
+}
