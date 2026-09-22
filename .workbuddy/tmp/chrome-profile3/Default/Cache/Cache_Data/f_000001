@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh" dir="auto">
+
+<head>
+	<meta name="generator" content="Hugo 0.145.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=52792&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>LFL&#39;s Blog</title>
+<meta name="keywords" content="Hugo, Blog, 技术博客, Linux, Docker, 编程">
+<meta name="description" content="LFL 的个人技术博客 — 记录学习与探索">
+<meta name="author" content="LFL">
+<link rel="canonical" href="http://localhost:52792/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.4ae58abcfda4e2d114c10dc9101cf5e70defd1c5da6d43bed38655491541c2b8.css" integrity="sha256-SuWKvP2k4tEUwQ3JEBz15w3v0cXabUO&#43;04ZVSRVBwrg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:52792/feather.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:52792/feather.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:52792/feather.png">
+<link rel="apple-touch-icon" href="http://localhost:52792/feather.png">
+<link rel="mask-icon" href="http://localhost:52792/feather.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:52792/index.xml">
+<link rel="alternate" type="application/json" href="http://localhost:52792/index.json">
+<link rel="alternate" hreflang="zh" href="http://localhost:52792/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+<meta property="og:url" content="http://localhost:52792/">
+  <meta property="og:site_name" content="LFL&#39;s Blog">
+  <meta property="og:title" content="LFL&#39;s Blog">
+  <meta property="og:description" content="LFL 的个人技术博客 — 记录学习与探索">
+  <meta property="og:locale" content="zh">
+  <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LFL&#39;s Blog">
+<meta name="twitter:description" content="LFL 的个人技术博客 — 记录学习与探索">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "LFL's Blog",
+  "url": "http://localhost:52792/",
+  "description": "LFL 的个人技术博客 — 记录学习与探索",
+  "logo": "http://localhost:52792/feather.png",
+  "sameAs": [
+      "https://github.com/LFLmLXY"
+  ]
+}
+</script>
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:52792/" accesskey="h" title="LFL&#39;s Blog (Alt + H)">
+                <img src="http://localhost:52792/R-C.jpeg" alt="" aria-label="logo"
+                    height="45">LFL&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:52792/" title="LFL&#39;s Blog">
+                    <span class="active">首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:52792/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:52792/categories/" title="Categories">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:52792/tags/" title="Tags">
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:52792/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:52792/about/" title="关于">
+                    <span>关于</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<article class="first-entry home-info">
+    <header class="entry-header">
+        <h1>🐱 相信奇迹的人本身就和奇迹一样了不起 ✨</h1>
+    </header>
+    <div class="entry-content">
+        Welcome to my blog
+    </div>
+    <footer class="entry-footer">
+        <div class="social-icons" >
+    <a href="https://github.com/LFLmLXY" target="_blank" rel="noopener noreferrer me"
+        title="Github">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+    </a>
+</div>
+
+    </footer>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">PuppyMoney
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>《小狗钱钱2》读后感：寻找那块白色石头
+关注
+引言
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-09-20 14:56:45 +0800 CST'>2026-09-20</span>&nbsp;·&nbsp;6 分钟&nbsp;·&nbsp;2902 字&nbsp;·&nbsp;LFL</footer>
+  <a class="entry-link" aria-label="post link to PuppyMoney" href="http://localhost:52792/posts/puppymoney/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">数字签名简述
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>一、介绍 百科：是一种功能类似写在纸上的普通签名、但是使用了公钥加密领域的技术，以用于鉴别数字信息的方法。一套数字签名通常会定义两种互补的运算，一个用于签名，另一个用于验证。
+数字签名的出现是为了解决，将公钥安全的传送到目标。防止黑客截获篡改公钥。
+二、原理 签名：网站提供数据或密钥给CA组织，将其用散列函数进行转码，再给转码后的值用CA的私钥加密。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-12-06 22:09:39 +0800 CST'>2025-12-06</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;348 字&nbsp;·&nbsp;LFL</footer>
+  <a class="entry-link" aria-label="post link to 数字签名简述" href="http://localhost:52792/posts/digital_signature/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Docker的安装与配置
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>一、 前言 写这篇文章的原因是我不想在本机上安装别的版本的mysql和redis，但我想使用，于是我用vm装了CentOS7，安装了docker，部署了mysql和redis。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-05-03 16:47:54 +0800 CST'>2025-05-03</span>&nbsp;·&nbsp;4 分钟&nbsp;·&nbsp;1675 字&nbsp;·&nbsp;LFL</footer>
+  <a class="entry-link" aria-label="post link to Docker的安装与配置" href="http://localhost:52792/posts/centos_docker/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Neovim的基本配置
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>简介 Neovim 是一个旨在积极重构Vim的项目，目的是简化维护、鼓励贡献、在多个开发人员之间拆分工作、启用高级用户界面以及最大化可扩展性。它是Vim的升级版，加入了许多Vim还没有实现的功能，因此被认为是一个更现代、更强大的文本编辑器。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-05-02 10:43:08 +0800 CST'>2025-05-02</span>&nbsp;·&nbsp;9 分钟&nbsp;·&nbsp;4498 字&nbsp;·&nbsp;LFL</footer>
+  <a class="entry-link" aria-label="post link to Neovim的基本配置" href="http://localhost:52792/posts/neovim_set/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">MC服务器搭建
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>最低jdk版本要求 先贴一个来自Minecraft Wiki的Minecraft对Java的运行标准
+从1.12（17w13a）开始，运行Minecraft的最低要求是jdk8。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-04-05 14:31:51 +0800 CST'>2025-04-05</span>&nbsp;·&nbsp;5 分钟&nbsp;·&nbsp;2069 字&nbsp;·&nbsp;LFL</footer>
+  <a class="entry-link" aria-label="post link to MC服务器搭建" href="http://localhost:52792/posts/mc_service/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">锐捷校园网——实现多设备上网
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>前言 我这里使用的是树莓派烧录的openwrt，本地编译我试了很多次，都失败了，我建议小白就去大神搭建的云编译平台openwrt。烧录固件的软件我用的树莓派官方的烧录器。
+云编译 openwrt。填上我们需要的一些软件包，把后面的ipv6打上勾，之后就是下载-&gt;烧录-&gt;启动
+1luci-app-ttyd mod-rkp-ipid iptables-mod-filter iptables-mod-ipopt iptables-mod-u32 iptables-nft kmod-ipt-ipopt ipset iptables-mod-conntrack-extra 联网 开机之后，用电脑连接上wifi名字叫Kwrt_5G，然后用网线让树莓派连接上校园网，增加一个wan口。wan口设备选择的是br-lan口，用的dhcp协议
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-03-28 18:13:42 +0800 CST'>2025-03-28</span>&nbsp;·&nbsp;9 分钟&nbsp;·&nbsp;4202 字&nbsp;·&nbsp;LFL</footer>
+  <a class="entry-link" aria-label="post link to 锐捷校园网——实现多设备上网" href="http://localhost:52792/posts/openwrt/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">积累算法题🎋
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>1. 最大公约数 1&#34;&#34;&#34; 2输入两个正整数求它们的最大公约数 3&#34;&#34;&#34; 4x = int(input(&#39;x = &#39;)) 5y = int(input(&#39;y = &#39;)) 6s = x * y 7while y % x != 0: 8 x, y = y % x, x 9print(f&#39;最大公约数: {x}&#39;) 10print(f&#39;最小公倍数: {s/x}&#39;) 2.斐波那契数列 1&#34;&#34;&#34; 2输出斐波那契数列中的前20个数 3&#34;&#34;&#34; 4a, b = 0, 1 5for _ in range(20): 6 a, b = b, a &#43; b 7 print(a) 3. 快速幂 如图所示，如果幂是奇数就减1算的时候乘自变量，是偶数就除2算的时候乘自身。一共有三个自身和一个自变量
+计算的时候一定是从下往上的。
+例如：
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-03-11 20:18:54 +0800 CST'>2025-03-11</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;211 字&nbsp;·&nbsp;LFL</footer>
+  <a class="entry-link" aria-label="post link to 积累算法题🎋" href="http://localhost:52792/posts/pytip/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Hugo &#43; PaperMod &#43; Github Pages 搭建一个完善的个人博客
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>1. 前言 写这篇文章为了熟悉一下markdown的语法，如果以后还要建blog的话可以有一个熟悉的参考。
+我是跟随着这位大佬建好的博客，这篇文章也是参考大佬的博客写的。
+bilibili这是他建博客的视频，你们哪里不懂的可以看一下。
+2. 搭建 hugo 首先，安装 hugo，在 Windows 中，推荐使用 scoop 来安装预编译的二进制版本
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-03-03 21:45:43 +0800 CST'>2025-03-03</span>&nbsp;·&nbsp;19 分钟&nbsp;·&nbsp;9415 字&nbsp;·&nbsp;LFL</footer>
+  <a class="entry-link" aria-label="post link to Hugo &#43; PaperMod &#43; Github Pages 搭建一个完善的个人博客" href="http://localhost:52792/posts/create-blog/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Markdown 语法参考手册
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Markdown 基本语法 标题(Headings) # 一级标题 渲染为 &lt;h1&gt;一级标题&lt;/h1&gt;
+## 二级标题 渲染为 &lt;h2&gt;二级标题&lt;/h2&gt;
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-03-03 21:45:38 +0800 CST'>2025-03-03</span>&nbsp;·&nbsp;3 分钟&nbsp;·&nbsp;1011 字&nbsp;·&nbsp;LFL</footer>
+  <a class="entry-link" aria-label="post link to Markdown 语法参考手册" href="http://localhost:52792/posts/markdown/"></a>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span><a href="https://LFLmLXY.github.io/">©2025 LFL&rsquo;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+<div class="reading-progress" id="reading-progress"></div>
+
+
+<div class="floating-actions">
+  <a href="/" class="floating-btn" id="btn-home" title="回首页" aria-label="回首页">🏠</a>
+  <button class="floating-btn" id="btn-copy-link" title="复制文章链接" aria-label="复制链接">🔗</button>
+  <button class="floating-btn" id="btn-scroll-top" title="回顶部" aria-label="回顶部">⬆</button>
+</div>
+
+
+<div style="text-align:center;padding:1rem 0;font-size:1.5rem;opacity:0.6;pointer-events:none">
+  🐱 🐾 ✨ 🐾 🐱
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js"
+  integrity="sha512-9ZKhgaFdKlsELap/dGw3Iaz5Bj+Las0XXZiRKYZaN9QArg6FtkD5rULNmNH4rTCTFxjPiBGr3MX8smRADRorDA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  
+  var OSName = "unknown";
+  var navApp = navigator.userAgent.toLowerCase();
+  switch (true) {
+    case (navApp.indexOf("win") != -1): OSName = "windows"; break;
+    case (navApp.indexOf("mac") != -1): OSName = "apple"; break;
+    case (navApp.indexOf("linux") != -1): OSName = "linux"; break;
+    case (navApp.indexOf("x11") != -1): OSName = "unix"; break;
+  }
+
+  
+  var images = Array.from(document.querySelectorAll(".post-content img"));
+  images.forEach(function(img) {
+    mediumZoom(img, { margin: 1, container: null, template: null });
+  });
+
+  if (OSName == "windows") document.body.className += ' win11';
+
+  
+  (function() {
+    var bar = document.getElementById('reading-progress');
+    if (!bar) return;
+    window.addEventListener('scroll', function() {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      if (scrollHeight > 0) bar.style.width = (scrollTop / scrollHeight * 100) + '%';
+    });
+  })();
+
+  
+  (function() {
+    var btnCopy = document.getElementById('btn-copy-link');
+    if (!btnCopy) return;
+    btnCopy.addEventListener('click', function() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        btnCopy.textContent = '✅';
+        setTimeout(function() { btnCopy.textContent = '🔗'; }, 1500);
+      });
+    });
+  })();
+
+  
+  (function() {
+    var btnTop = document.getElementById('btn-scroll-top');
+    if (!btnTop) return;
+    window.addEventListener('scroll', function() {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop > 300) {
+        btnTop.classList.add('visible');
+      } else {
+        btnTop.classList.remove('visible');
+      }
+    });
+    btnTop.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+
+  
+  (function() {
+    var headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    headings.forEach(function(h) {
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.className = 'anchor-link';
+      a.textContent = '#';
+      a.title = '复制链接';
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var url = window.location.origin + window.location.pathname + '#' + h.id;
+        navigator.clipboard.writeText(url).then(function() {
+          a.textContent = '✓';
+          setTimeout(function() { a.textContent = '#'; }, 1500);
+        });
+      });
+      h.appendChild(a);
+    });
+  })();
+
+  
+  document.documentElement.style.scrollBehavior = 'smooth';
+</script>
+
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

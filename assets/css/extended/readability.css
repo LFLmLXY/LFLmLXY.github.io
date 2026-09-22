@@ -1,0 +1,187 @@
+/* ============================================
+   排版打磨 — 正文阅读体验 + 首页美化
+   （配合橘猫主题：--cat-orange / --cat-pink）
+   ============================================ */
+
+/* ---------- 中文字体链 ---------- */
+body {
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "HarmonyOS Sans SC", "MiSans", "Microsoft YaHei", sans-serif;
+}
+
+/* ---------- 文章正文 ---------- */
+.post-content {
+  font-size: 1.02rem;
+  line-height: 1.95;
+  letter-spacing: 0.015em;
+}
+.post-content p {
+  margin: 1.05em 0;
+}
+
+/* h2：左侧渐变色条 + 虚线底 */
+.post-content h2 {
+  position: relative;
+  margin-top: 2.4em;
+  padding-left: 16px;
+  padding-bottom: 0.35em;
+  border-bottom: 1px dashed var(--border);
+}
+.post-content h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.16em;
+  bottom: 0.42em;
+  width: 5px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--cat-orange), var(--cat-pink));
+}
+
+/* h3：橙色小圆点 */
+.post-content h3 {
+  position: relative;
+  margin-top: 1.8em;
+  padding-left: 18px;
+}
+.post-content h3::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cat-orange);
+  opacity: 0.85;
+}
+
+/* ---------- 链接 ---------- */
+.post-content a:not(.anchor-link) {
+  text-decoration: underline dotted;
+  text-decoration-color: var(--cat-paw);
+  text-underline-offset: 4px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.post-content a:not(.anchor-link):hover {
+  color: var(--link-hover);
+  text-decoration-style: solid;
+}
+
+/* ---------- 行内代码 ---------- */
+.post-content code:not(pre code) {
+  padding: 0.15em 0.5em;
+  border-radius: 6px;
+  font-size: 0.88em;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+}
+
+/* ---------- 普通引用块（提示块另有样式） ---------- */
+.post-content > blockquote {
+  margin: 1.4em 0;
+  padding: 0.7em 1.2em;
+  border-left: 4px solid var(--cat-paw);
+  border-radius: 4px 12px 12px 4px;
+  background: var(--code-bg);
+  color: var(--secondary);
+}
+.post-content > blockquote p {
+  margin: 0.35em 0;
+}
+
+/* ---------- 表格 ---------- */
+.post-content table {
+  width: 100%;
+  margin: 1.4em 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 0.95rem;
+}
+.post-content th,
+.post-content td {
+  padding: 0.55em 1em;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.post-content th {
+  background: var(--code-bg);
+  font-weight: 700;
+}
+.post-content tr:last-child td {
+  border-bottom: none;
+}
+.post-content tbody tr:nth-child(even) {
+  background: rgba(249, 115, 22, 0.03);
+}
+.post-content tbody tr:hover {
+  background: rgba(249, 115, 22, 0.07);
+}
+
+/* ---------- 分隔线 ---------- */
+.post-content hr {
+  border: none;
+  height: 2px;
+  margin: 2.6em 0;
+  background: linear-gradient(90deg, transparent, var(--cat-orange), transparent);
+  border-radius: 2px;
+}
+
+/* ---------- 图片 ---------- */
+.post-content img {
+  border-radius: 12px;
+}
+
+/* ---------- 代码块容器 ---------- */
+.post-content .highlight {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.post-content .highlight pre {
+  margin: 0;
+  padding: 1rem 1.2rem;
+}
+
+/* ---------- 首页 hero 区（左对齐） ---------- */
+.home-info .entry-header h1 {
+  font-size: clamp(1.4rem, 2.2vw, 1.7rem);
+  line-height: 1.5;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+@media (min-width: 900px) {
+  .home-info .entry-header h1 {
+    white-space: nowrap;
+  }
+}
+.home-info .entry-content {
+  margin-top: 1em;
+  color: var(--secondary);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- 首页文章卡片 ---------- */
+.post-entry {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid transparent;
+}
+.post-entry:hover {
+  transform: translateY(-4px);
+  border-color: var(--cat-paw);
+}
+.post-entry .entry-title {
+  font-size: 1.35rem;
+}
+.post-entry .entry-title:hover {
+  color: var(--cat-orange);
+}
+.post-entry .entry-footer {
+  color: var(--secondary);
+  opacity: 0.9;
+}
