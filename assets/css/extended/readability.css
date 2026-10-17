@@ -91,21 +91,39 @@ body {
 }
 
 /* ---------- 表格 ---------- */
+/* 主题 reset.css 里 table 是 display:block（为窄屏横向滚动准备的），
+   在这种模式下 width:100% 只撑开外框，单元格仍然挤在左边 —— 这里改回真正的表格布局 */
 .post-content table {
+  display: table;
+  table-layout: auto;
   width: 100%;
   margin: 1.4em 0;
   border-collapse: separate;
   border-spacing: 0;
   border: 1px solid var(--border);
   border-radius: 12px;
-  overflow: hidden;
   font-size: 0.95rem;
+  /* 主题给 table 设了 word-break:keep-all，中文长句会拒绝换行把表格撑爆 */
+  word-break: normal;
 }
 .post-content th,
 .post-content td {
   padding: 0.55em 1em;
   border-bottom: 1px solid var(--border);
   text-align: left;
+}
+/* 圆角不能靠 overflow:hidden（会把超宽表格直接裁掉），改成一格一格圆 */
+.post-content thead tr:first-child th:first-child {
+  border-top-left-radius: 11px;
+}
+.post-content thead tr:first-child th:last-child {
+  border-top-right-radius: 11px;
+}
+.post-content tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 11px;
+}
+.post-content tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 11px;
 }
 .post-content th {
   background: var(--code-bg);
