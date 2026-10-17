@@ -78,11 +78,6 @@ a:hover {
     0 20px 25px -10px rgba(249, 115, 22, 0.08);
 }
 
-/* 导航栏 */
-.nav {
-  border-radius: 0 0 var(--radius) var(--radius);
-}
-
 /* 页脚 */
 .footer {
   border-radius: var(--radius) var(--radius) 0 0;

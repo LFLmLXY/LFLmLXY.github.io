@@ -1,0 +1,322 @@
+/* ============================================
+   细节打磨 — 焦点、当前页、分页、排版微调
+   （加载顺序晚于 cat-theme / home-hero / code-block）
+   ============================================ */
+
+/* ---------- 键盘焦点可见 ---------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--cat-orange);
+  outline-offset: 3px;
+}
+
+/* 鼠标点击不出现焦点环 */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ---------- 导航当前页 ----------
+   已统一由 nav.css 处理（#menu a:has(.active) 胶囊） */
+
+/* ---------- 分页弱化（原来是恒定的橘色实底） ---------- */
+.pagination a {
+  background: var(--entry) !important;
+  color: var(--secondary) !important;
+  border: 1px solid var(--border) !important;
+  font-weight: 600;
+  padding: 8px 18px !important;
+}
+
+.pagination a:hover {
+  background: var(--cat-orange) !important;
+  border-color: var(--cat-orange) !important;
+  color: #fff !important;
+  box-shadow: 0 10px 20px -14px rgba(249, 115, 22, 0.9);
+}
+
+/* ---------- 标题平衡换行（避免末行孤字） ---------- */
+.post-title,
+.entry-title,
+.page-header h1,
+.home-hero .entry-header h1 {
+  text-wrap: balance;
+}
+
+.post-content p,
+.post-content li,
+.post-description {
+  text-wrap: pretty;
+}
+
+/* ---------- 页脚文字 ---------- */
+.footer {
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--cat-paw);
+  text-underline-offset: 3px;
+}
+
+/* ---------- 面包屑 ---------- */
+.breadcrumbs {
+  font-size: 0.84rem;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- 分区页（归档 / 分类 / 标签）页头装饰 ---------- */
+.page-header {
+  position: relative;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 10px;
+}
+
+.page-header h1 {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  font-size: 1.7rem;
+}
+
+.page-header h1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -7px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--cat-orange), var(--cat-pink));
+}
+
+.page-header .post-description {
+  margin-top: 14px;
+  color: var(--secondary);
+  font-size: 0.95rem;
+}
+
+.page-header h1 a[title="RSS"] {
+  color: var(--cat-orange);
+  vertical-align: middle;
+  margin-left: 10px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.page-header h1 a[title="RSS"]:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* ---------- 归档页：年份 / 月份时间轴 ---------- */
+.archive-year {
+  position: relative;
+  margin-top: 30px;
+  padding-left: 22px;
+  border-left: 2px solid var(--border);
+}
+
+.archive-year-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 4px;
+  font-size: 1.42rem;
+  color: var(--primary);
+}
+
+.archive-year-header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.archive-month-header {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 14px 0 6px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--secondary);
+}
+
+.archive-month-header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.archive-count {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgba(249, 115, 22, 0.12);
+  color: var(--cat-orange);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.archive-entry {
+  position: relative;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.archive-entry:hover {
+  background: rgba(249, 115, 22, 0.06);
+  transform: translateX(3px);
+}
+
+.archive-entry-title {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.archive-entry:hover .archive-entry-title {
+  color: var(--cat-orange);
+}
+
+.archive-meta {
+  margin-top: 3px;
+  font-size: 0.8rem;
+  color: var(--secondary);
+  opacity: 0.85;
+}
+
+/* ---------- 首页 / 列表文章卡片编号 ---------- */
+.main {
+  counter-reset: post-index;
+}
+
+.post-entry {
+  counter-increment: post-index;
+}
+
+.post-entry::before {
+  content: counter(post-index, decimal-leading-zero);
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--cat-orange);
+  opacity: 0.16;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.post-entry:hover::before {
+  opacity: 0.38;
+  transform: translateY(-2px);
+}
+
+/* 给右上角序号让出位置 */
+.post-entry .entry-header h2 {
+  padding-right: 3rem;
+}
+
+/* 摘要：字号贴近正文，最多三行 */
+.post-entry .entry-content {
+  margin: 10px 0 14px;
+  font-size: 0.94rem;
+  line-height: 1.72;
+  -webkit-line-clamp: 3;
+}
+
+/* ---------- 文章页标题 ---------- */
+.post-header .post-title {
+  margin: 2px 0 6px;
+  font-size: clamp(1.7rem, 4vw, 2.15rem);
+  line-height: 1.32;
+  letter-spacing: 0.005em;
+  color: var(--primary);
+}
+
+.post-meta {
+  font-size: 0.88rem;
+  line-height: 1.9;
+}
+
+/* ---------- 上一篇 / 下一篇：两张小卡片 ---------- */
+.paginav {
+  gap: 12px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  line-height: 1.55;
+}
+
+.paginav a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  padding: 13px 17px;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 10px 22px -18px rgba(249, 115, 22, 0.6);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+}
+
+.paginav a:hover {
+  background: var(--entry);
+  border-color: var(--cat-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px -18px rgba(249, 115, 22, 0.95);
+}
+
+.paginav .title {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--cat-orange);
+  opacity: 0.9;
+}
+
+.paginav a span:not(.title) {
+  color: var(--primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.paginav a:hover span:not(.title) {
+  color: var(--cat-orange);
+}
+
+.paginav span:hover:not(.title) {
+  box-shadow: none;
+}
+
+/* ---------- 减少动效偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after,
+  .theme-fading *,
+  .theme-fading *::before,
+  .theme-fading *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

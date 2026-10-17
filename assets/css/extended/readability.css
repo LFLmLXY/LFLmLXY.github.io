@@ -135,35 +135,11 @@ body {
   border-radius: 12px;
 }
 
-/* ---------- 代码块容器 ---------- */
-.post-content .highlight {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-}
-.post-content .highlight pre {
-  margin: 0;
-  padding: 1rem 1.2rem;
-}
+/* ---------- 代码块容器 ----------
+   窗口式卡片（工具条 / 语言标签 / 复制按钮）见 code-block.css */
 
-/* ---------- 首页 hero 区（左对齐） ---------- */
-.home-info .entry-header h1 {
-  font-size: clamp(1.4rem, 2.2vw, 1.7rem);
-  line-height: 1.5;
-  word-break: keep-all;
-  overflow-wrap: anywhere;
-}
-@media (min-width: 900px) {
-  .home-info .entry-header h1 {
-    white-space: nowrap;
-  }
-}
-.home-info .entry-content {
-  margin-top: 1em;
-  color: var(--secondary);
-  font-size: 1.05rem;
-  letter-spacing: 0.04em;
-}
+/* ---------- 首页 hero 区 ----------
+   具体样式见 home-hero.css（头像 / 统计徽章 / 猫爪纹理） */
 
 /* ---------- 首页文章卡片 ---------- */
 .post-entry {

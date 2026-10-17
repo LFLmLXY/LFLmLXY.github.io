@@ -1,0 +1,147 @@
+/* ============================================
+   代码块 — 带语言标签的窗口式卡片
+   ============================================ */
+
+.post-content .code-block {
+  position: relative;
+  margin: 1.6em 0;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--code-block-bg);
+  overflow: hidden;
+  box-shadow:
+    0 14px 30px -22px rgba(67, 20, 7, 0.35),
+    0 2px 6px -4px rgba(67, 20, 7, 0.18);
+}
+
+/* ---------- 顶部工具条 ---------- */
+.code-block__bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(249, 115, 22, 0.1),
+    rgba(249, 115, 22, 0.03)
+  );
+  border-bottom: 1px solid var(--border);
+}
+
+.code-block__dots {
+  display: inline-flex;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.code-block__dots i {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.code-block__dots i:nth-child(1) {
+  background: #fb7185;
+}
+.code-block__dots i:nth-child(2) {
+  background: #fbbf24;
+}
+.code-block__dots i:nth-child(3) {
+  background: #4ade80;
+}
+
+.code-block__lang {
+  font-family: "JetBrains Mono", "Cascadia Code", monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  opacity: 0.85;
+}
+
+/* ---------- 代码区域 ---------- */
+.post-content .code-block .highlight {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  overflow-x: auto;
+}
+
+.post-content .code-block .highlight pre {
+  margin: 0;
+  padding: 1rem 1.1rem 1.1rem;
+  background: transparent !important;
+}
+
+.post-content .code-block .highlight pre code {
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+/* 行号列 */
+.post-content .code-block .ln {
+  margin-right: 0.9em;
+  padding-right: 0.75em;
+  border-right: 1px solid var(--border);
+  color: var(--secondary);
+  opacity: 0.55;
+  user-select: none;
+}
+
+/* ---------- 复制按钮（主题 JS 注入，移到工具条内） ---------- */
+.code-block__bar .copy-code {
+  position: static;
+  margin-left: auto;
+  display: inline-block;
+  padding: 2px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px !important;
+  background: var(--entry);
+  color: var(--secondary);
+  font-family: "Nunito", sans-serif;
+  font-size: 0.72rem;
+  line-height: 1.7;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.code-block__bar .copy-code:hover {
+  background: var(--cat-orange) !important;
+  border-color: var(--cat-orange) !important;
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+
+/* ---------- 暗色模式 ---------- */
+.dark .code-block {
+  box-shadow:
+    0 16px 34px -24px rgba(0, 0, 0, 0.9),
+    0 2px 6px -4px rgba(0, 0, 0, 0.6);
+}
+
+.dark .code-block__bar {
+  background: linear-gradient(
+    180deg,
+    rgba(251, 146, 60, 0.12),
+    rgba(251, 146, 60, 0.02)
+  );
+}
+
+/* ---------- 移动端 ---------- */
+@media (max-width: 720px) {
+  .code-block__bar {
+    padding: 7px 11px;
+  }
+  .post-content .code-block .highlight pre {
+    padding: 0.85rem 0.9rem 0.95rem;
+  }
+  .post-content .code-block .highlight pre code {
+    font-size: 0.82rem;
+  }
+}

@@ -1,1 +1,13 @@
-hugo --gc --minify --cleanDestinationDir
+日常发博客（三条命令，都在仓库根目录执行）
+
+  .\blog new "文章标题"     新建文章（默认草稿，写完把 draft 改成 false）
+  .\blog preview            本地预览，含草稿，改文件自动刷新 → http://localhost:1313/
+  .\blog deploy             构建校验 + 提交 + 推送，GitHub Actions 自动发布
+
+自定义提交说明：
+
+  .\blog deploy "改了导航栏"
+
+等价的老命令（一般用不到了，Actions 会自己构建）：
+
+  hugo --gc --minify --cleanDestinationDir

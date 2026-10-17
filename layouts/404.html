@@ -1,0 +1,26 @@
+{{- define "main" }}
+<section class="not-found">
+    <div class="not-found__card">
+        <div class="not-found__cat" aria-hidden="true">🐱</div>
+        <p class="not-found__code">404</p>
+        <h1 class="not-found__title">这一页被猫叼走了</h1>
+        <p class="not-found__desc">它可能被移动、改过名字，或者从来就没有存在过 🐾</p>
+
+        <div class="not-found__actions">
+            <a class="not-found__btn" href="{{ "" | relLangURL }}">回首页</a>
+            <a class="not-found__btn not-found__btn--ghost" href="{{ "search/" | relLangURL }}">搜一下</a>
+        </div>
+
+        {{- with first 3 (where site.RegularPages "Type" "posts") }}
+        <div class="not-found__recent">
+            <span>最近在写</span>
+            <ul>
+                {{- range . }}
+                <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                {{- end }}
+            </ul>
+        </div>
+        {{- end }}
+    </div>
+</section>
+{{- end }}{{/* end main */ -}}

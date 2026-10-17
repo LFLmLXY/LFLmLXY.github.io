@@ -1,0 +1,9 @@
+{{- $lang := .Type | default "text" -}}
+{{- $code := trim .Inner "\n" -}}
+<div class="code-block" data-lang="{{ $lang }}">
+    <div class="code-block__bar">
+        <span class="code-block__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="code-block__lang">{{ $lang }}</span>
+    </div>
+    {{- highlight $code $lang .Options -}}
+</div>

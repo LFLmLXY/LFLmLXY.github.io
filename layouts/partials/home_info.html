@@ -1,0 +1,60 @@
+{{- with site.Params.homeInfoParams }}
+{{- $hp := . }}
+{{- $avatar := $hp.Avatar | default site.Params.label.icon }}
+{{- $postCount := len (where site.RegularPages "Type" "posts") }}
+{{- $catCount := len site.Taxonomies.categories }}
+{{- $tagCount := len site.Taxonomies.tags }}
+{{- $showStats := true }}
+{{- if eq (printf "%v" $hp.ShowStats) "false" }}{{ $showStats = false }}{{ end }}
+<article class="first-entry home-info">
+    <div class="home-hero">
+        <div class="home-hero__glow" aria-hidden="true"></div>
+        <div class="home-hero__paws" aria-hidden="true"></div>
+
+        {{- with $avatar }}
+        <div class="home-hero__avatar">
+            <img src="{{ . | relURL }}" alt="{{ $hp.Title | plainify }}" width="108" height="108" loading="eager"
+                decoding="async">
+        </div>
+        {{- end }}
+
+        <div class="home-hero__body">
+            <header class="entry-header">
+                <h1>{{ $hp.Title | markdownify }}</h1>
+            </header>
+
+            {{- with $hp.Subtitle }}
+            <p class="home-hero__subtitle">{{ . | markdownify }}</p>
+            {{- end }}
+
+            {{- with $hp.Content }}
+            <div class="entry-content">{{ . | markdownify }}</div>
+            {{- end }}
+
+            {{- if $showStats }}
+            <ul class="home-hero__stats">
+                <li>
+                    <a href="{{ "archives/" | relLangURL }}">
+                        <strong>{{ $postCount }}</strong><span>篇文章</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ "categories/" | relLangURL }}">
+                        <strong>{{ $catCount }}</strong><span>个分类</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ "tags/" | relLangURL }}">
+                        <strong>{{ $tagCount }}</strong><span>个标签</span>
+                    </a>
+                </li>
+            </ul>
+            {{- end }}
+
+            <footer class="entry-footer">
+                {{ partial "social_icons.html" (dict "align" $hp.AlignSocialIconsTo) }}
+            </footer>
+        </div>
+    </div>
+</article>
+{{- end -}}

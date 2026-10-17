@@ -1,64 +1,71 @@
-/* from reset */
+/* ============================================
+   滚动条 — 纤细圆润版（覆盖主题默认 19px 粗条）
+   ============================================ */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--tertiary) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 10px;
+  background: var(--theme);
+}
+
 ::-webkit-scrollbar-track {
-    background: 0 0;
+  background: 0 0;
 }
 
 .list:not(.dark)::-webkit-scrollbar-track {
-    background: var(--code-bg);
+  background: var(--code-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--tertiary);
-    border: 5px solid var(--theme);
-    border-radius: 0;
+  background: var(--tertiary);
+  border: 3px solid var(--theme);
+  border-radius: 999px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary);
+  background: var(--cat-paw);
 }
 
 .list:not(.dark)::-webkit-scrollbar-thumb {
-    border: 5px solid var(--code-bg);
+  border-color: var(--code-bg);
 }
 
-
-::-webkit-scrollbar:not(.highlighttable, .highlight table, .gist .highlight) {
-    background: var(--theme);
+/* 代码块内横向滚动条 */
+.post-content :not(table) ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-/* from post-single */
-.post-content .highlighttable td .highlight pre code::-webkit-scrollbar {
-    display: none;
-}
-
-/* 代码块内滚动条 */
 .post-content :not(table) ::-webkit-scrollbar-thumb {
-    border: 2px solid var(--code-block-bg);
-    background: var(--tertiary);
-}
-.post-content :not(table) ::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary);
+  background: var(--tertiary);
+  border: 2px solid var(--code-block-bg);
+  border-radius: 999px;
 }
 
+.post-content :not(table) ::-webkit-scrollbar-thumb:hover {
+  background: var(--cat-paw);
+}
+
+/* 表格滚动条不要撑高 */
+.post-content table::-webkit-scrollbar-thumb {
+  border-width: 2px;
+}
+
+.post-content .highlighttable td .highlight pre code::-webkit-scrollbar {
+  display: none;
+}
+
+/* gist 保持中性灰 */
 .gist table::-webkit-scrollbar-thumb {
-    border: 2px solid rgb(255, 255, 255);
-    background: rgb(173, 173, 173);
+  border: 2px solid #fff;
+  background: #adadad;
 }
 
 .gist table::-webkit-scrollbar-thumb:hover {
-    background: rgb(112, 112, 112);
-}
-
-.post-content table::-webkit-scrollbar-thumb {
-    border-width: 2px;
-}
-
-/* from zmedia */
-/* 这里将 min-width 设置得尽量小一点，是为了防止在移动端的滚动条的样式失效 */
-@media screen and (min-width: 100px) {
-
-    /* reset */
-    ::-webkit-scrollbar {
-        width: 19px;
-        height: 11px;
-    }
+  background: #707070;
 }

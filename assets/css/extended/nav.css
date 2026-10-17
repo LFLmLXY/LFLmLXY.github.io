@@ -1,0 +1,220 @@
+/* ============================================
+   顶部导航 —— 毛玻璃悬浮条 + 胶囊菜单
+   （--nav-width / --header-height 在 theme-vars-override.css 中定义）
+   ============================================ */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: var(--theme);
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* 支持的浏览器用半透明 + 背景模糊，滚动时内容从下方淡淡透出 */
+@supports ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
+  .header {
+    background: color-mix(in srgb, var(--theme) 78%, transparent);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    backdrop-filter: blur(18px) saturate(180%);
+  }
+}
+
+/* 滚动后：加一条暖色分隔线 + 极轻的投影 */
+.header.is-stuck {
+  border-bottom-color: color-mix(in srgb, var(--border) 80%, transparent);
+  box-shadow: 0 14px 34px -28px rgba(249, 115, 22, 0.9);
+}
+
+.header.is-stuck::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.45), transparent);
+  pointer-events: none;
+}
+
+.dark .header.is-stuck {
+  box-shadow: 0 16px 34px -26px rgba(0, 0, 0, 0.9);
+}
+
+/* ---------- 容器 ---------- */
+.nav {
+  align-items: center;
+  column-gap: 8px;
+}
+
+/* ---------- 站点标题 + 头像 ---------- */
+.logo a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--primary);
+}
+
+.logo a img {
+  height: 40px;
+  width: auto;
+  margin-inline-end: 0;
+  border-radius: 50% !important;
+  transform: none;
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.22);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease;
+}
+
+.logo:hover img {
+  transform: rotate(-8deg) scale(1.06);
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.45);
+}
+
+/* ---------- 明暗切换按钮 ---------- */
+#theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin: auto 4px;
+  padding: 0;
+  border-radius: 50%;
+  color: var(--secondary);
+  transition: color 0.22s ease, background-color 0.22s ease;
+}
+
+#theme-toggle:hover {
+  color: var(--cat-orange);
+  background: rgba(249, 115, 22, 0.1);
+}
+
+#theme-toggle svg {
+  vertical-align: middle;
+}
+
+/* ---------- 菜单胶囊 ---------- */
+#menu {
+  gap: 4px;
+}
+
+#menu li + li {
+  margin-inline-start: 0;
+}
+
+#menu a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 0.93rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--secondary);
+  transition: color 0.22s ease, background-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+#menu a:hover {
+  color: var(--cat-orange);
+  background: rgba(249, 115, 22, 0.09);
+}
+
+/* 当前所在页面：淡橘底 + 内描边 */
+#menu a:has(.active) {
+  color: var(--cat-orange);
+  background: rgba(249, 115, 22, 0.13);
+  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.2);
+}
+
+#menu .active {
+  border-bottom: none;
+  font-weight: 700;
+}
+
+.dark #menu a:hover {
+  background: rgba(249, 115, 22, 0.16);
+}
+
+.dark #menu a:has(.active) {
+  background: rgba(249, 115, 22, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.3);
+}
+
+/* ---------- 窄屏：logo 与菜单同行，菜单横向滚动 ---------- */
+@media (max-width: 768px) {
+  .nav {
+    flex-wrap: nowrap;
+    column-gap: 4px;
+  }
+
+  .logo {
+    flex: 0 0 auto;
+    margin-inline: 14px 4px;
+  }
+
+  .logo a {
+    font-size: 17px;
+    gap: 8px;
+  }
+
+  .logo a img {
+    height: 34px;
+  }
+
+  #theme-toggle {
+    width: 34px;
+    height: 34px;
+  }
+
+  #menu {
+    flex: 1 1 auto;
+    margin-inline: 4px 10px;
+    padding-inline: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+  }
+
+  #menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  #menu a {
+    padding: 6px 11px;
+    font-size: 0.86rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .logo a {
+    font-size: 15px;
+    gap: 6px;
+  }
+
+  #menu a {
+    padding: 6px 9px;
+    font-size: 0.82rem;
+  }
+}
+
+/* ---------- 减少动效偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .logo a img,
+  #menu a,
+  #theme-toggle {
+    transition: none !important;
+  }
+
+  .logo:hover img {
+    transform: none;
+  }
+}

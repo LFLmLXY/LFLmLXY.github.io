@@ -97,6 +97,49 @@
     });
   })();
 
+  // ====== 代码块：把主题注入的复制按钮移进工具条 ======
+  window.addEventListener('load', function() {
+    document.querySelectorAll('.code-block').forEach(function(block) {
+      var btn = block.querySelector('.copy-code');
+      var bar = block.querySelector('.code-block__bar');
+      if (btn && bar && btn.parentNode !== bar) {
+        bar.appendChild(btn);
+      }
+    });
+  });
+
+  // ====== 切换明暗主题时才临时启用全站过渡 ======
+  (function() {
+    var root = document.documentElement;
+    var timer = null;
+    document.addEventListener('click', function(e) {
+      if (!e.target || !e.target.closest) return;
+      if (!e.target.closest('#theme-toggle, #theme-toggle-float')) return;
+      root.classList.add('theme-fading');
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        root.classList.remove('theme-fading');
+      }, 360);
+    }, true);
+  })();
+
+  // ====== 导航条：滚动后加分隔线与阴影 ======
+  (function() {
+    var header = document.querySelector('.header');
+    if (!header) return;
+    var stuck = false;
+    function update() {
+      var y = window.scrollY || document.documentElement.scrollTop || 0;
+      var next = y > 6;
+      if (next !== stuck) {
+        stuck = next;
+        header.classList.toggle('is-stuck', stuck);
+      }
+    }
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  })();
+
   // ====== 全局平滑滚动 ======
   document.documentElement.style.scrollBehavior = 'smooth';
 </script>

@@ -1,0 +1,176 @@
+/* ============================================
+   404 页面 — 猫叼走了你的页面
+   ============================================ */
+
+/* 覆盖主题默认的绝对定位大字 */
+.not-found {
+  position: static;
+  left: auto;
+  right: auto;
+  display: block;
+  height: auto;
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 40px 0 16px;
+}
+
+.not-found__card {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 46px 28px 38px;
+  border-radius: calc(var(--radius) + 6px);
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(120% 130% at 50% 0%, rgba(249, 115, 22, 0.14), transparent 60%),
+    var(--entry);
+  box-shadow:
+    0 22px 46px -28px rgba(249, 115, 22, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.not-found__cat {
+  font-size: 3.2rem;
+  line-height: 1;
+  animation: not-found-bob 3.2s ease-in-out infinite;
+}
+
+@keyframes not-found-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(4deg);
+  }
+}
+
+.not-found__code {
+  margin: 10px 0 0;
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-size: clamp(4.5rem, 16vw, 7rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  background: linear-gradient(120deg, var(--cat-orange), var(--cat-pink) 75%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.not-found__title {
+  margin: 0.15em 0 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.not-found__desc {
+  margin: 0.5em auto 0;
+  max-width: 26em;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--secondary);
+}
+
+/* ---------- 操作按钮 ---------- */
+.not-found__actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.not-found__btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 26px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: linear-gradient(100deg, var(--cat-orange), var(--cat-pink));
+  color: #fff;
+  font-size: 0.94rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  box-shadow: 0 12px 24px -14px rgba(249, 115, 22, 0.95);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.not-found__btn:hover {
+  transform: translateY(-2px);
+  color: #fff;
+  box-shadow: 0 18px 30px -16px rgba(249, 115, 22, 1);
+}
+
+.not-found__btn--ghost {
+  background: var(--entry);
+  border-color: var(--border);
+  color: var(--secondary);
+  box-shadow: none;
+}
+
+.not-found__btn--ghost:hover {
+  background: rgba(249, 115, 22, 0.08);
+  border-color: var(--cat-orange);
+  color: var(--cat-orange);
+  box-shadow: none;
+}
+
+/* ---------- 最近文章 ---------- */
+.not-found__recent {
+  margin-top: 34px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--border);
+  font-size: 0.88rem;
+  color: var(--secondary);
+}
+
+.not-found__recent > span {
+  display: block;
+  margin-bottom: 10px;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+}
+
+.not-found__recent ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.not-found__recent a {
+  color: var(--link-color);
+  text-decoration: none !important;
+  border-bottom: 1px dashed transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.not-found__recent a:hover {
+  border-bottom-color: var(--cat-paw);
+}
+
+/* ---------- 暗色模式 ---------- */
+.dark .not-found__card {
+  background:
+    radial-gradient(120% 130% at 50% 0%, rgba(251, 146, 60, 0.16), transparent 60%),
+    var(--entry);
+  box-shadow:
+    0 22px 46px -28px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ---------- 减少动效 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .not-found__cat {
+    animation: none;
+  }
+  .not-found__btn:hover {
+    transform: none;
+  }
+}
